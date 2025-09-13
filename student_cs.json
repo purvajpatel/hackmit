@@ -1,0 +1,150 @@
+{
+  "student_id": "S1234567",
+  "name": {
+    "first": "Jane",
+    "last": "Doe",
+    "preferred_name": "Jane"
+  },
+  "program": {
+    "degree": "B.S.",
+    "major": "Computer Science",
+    "minor": "Data Science",
+    "university": "Example University",
+    "start_term": "2023-08",
+    "expected_graduation": "2027-05",
+    "gpa": 3.86
+  },
+  "contact": {
+    "email": "jane.doe@example.edu",
+    "phone": "+1-555-010-1234",
+    "location": "City, State, USA",
+    "linkedin": "https://www.linkedin.com/in/jane-doe",
+    "github": "https://github.com/janedoe"
+  },
+  "skills": {
+    "languages": [
+      "Python",
+      "C++",
+      "JavaScript",
+      "SQL"
+    ],
+    "frameworks": [
+      "React",
+      "Flask",
+      "Node.js"
+    ],
+    "ml_dl": [
+      "TensorFlow",
+      "PyTorch"
+    ],
+    "tools": [
+      "Git",
+      "Docker",
+      "Linux",
+      "VS Code"
+    ],
+    "topics": [
+      "Data Structures",
+      "Algorithms",
+      "Distributed Systems",
+      "NLP"
+    ]
+  },
+  "coursework": [
+    {
+      "course": "Introduction to Computer Science",
+      "code": "CS101",
+      "status": "Completed"
+    },
+    {
+      "course": "Data Structures & Algorithms",
+      "code": "CS201",
+      "status": "In Progress"
+    },
+    {
+      "course": "Database Systems",
+      "code": "CS315",
+      "status": "Planned"
+    },
+    {
+      "course": "Operating Systems",
+      "code": "CS330",
+      "status": "Planned"
+    }
+  ],
+  "projects": [
+    {
+      "name": "Task Manager Web App",
+      "description": "Full\u2011stack app for task tracking with authentication and REST API.",
+      "tech": [
+        "React",
+        "Flask",
+        "PostgreSQL"
+      ],
+      "url": "https://example.com/task-manager",
+      "start": "2024-02",
+      "end": "2024-05",
+      "highlights": [
+        "Implemented JWT auth and role-based access controls",
+        "Deployed on Render with Docker; CI/CD via GitHub Actions"
+      ]
+    },
+    {
+      "name": "Image Classifier",
+      "description": "CNN that classifies images across 10 categories with data augmentation.",
+      "tech": [
+        "PyTorch",
+        "NumPy"
+      ],
+      "url": "https://example.com/image-classifier",
+      "start": "2024-09",
+      "end": null,
+      "highlights": [
+        "Achieved 91% test accuracy on CIFAR-10",
+        "Exported TorchScript model and built CLI inference tool"
+      ]
+    }
+  ],
+  "experience": [
+    {
+      "title": "Teaching Assistant",
+      "organization": "Example University \u2014 CS Dept.",
+      "type": "Part-time",
+      "start": "2024-01",
+      "end": null,
+      "responsibilities": [
+        "Led weekly lab sections and office hours for CS101",
+        "Graded programming assignments and provided feedback"
+      ]
+    }
+  ],
+  "extracurriculars": [
+    {
+      "org": "ACM Student Chapter",
+      "role": "Member"
+    },
+    {
+      "org": "Women in Computing",
+      "role": "Event Volunteer"
+    }
+  ],
+  "awards": [
+    {
+      "name": "Dean's List",
+      "term": "Fall 2024"
+    }
+  ],
+  "availability": {
+    "internships": [
+      "Summer 2026"
+    ],
+    "hours_per_week": 15,
+    "remote_ok": true,
+    "preferred_locations": [
+      "NYC",
+      "Austin",
+      "Remote"
+    ]
+  },
+  "last_updated": "2025-09-13"
+}
