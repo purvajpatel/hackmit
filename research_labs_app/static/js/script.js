@@ -1347,12 +1347,25 @@ function displayQuestions(questions) {
   questions.forEach((question, index) => {
     const questionEl = document.createElement('div');
     questionEl.className = 'question-item';
+    questionEl.id = `question-item-${index}`;
     questionEl.innerHTML = `
       <span class="question-number">${index + 1}.</span>
       <span class="question-text">${escapeHtml(question)}</span>
     `;
     questionsListEl.appendChild(questionEl);
   });
+}
+
+function updateQuestionIndicator(activeIndex) {
+  // Remove active class from all questions
+  const allQuestionItems = document.querySelectorAll('.question-item');
+  allQuestionItems.forEach(item => item.classList.remove('active-question'));
+  
+  // Add active class to current question
+  const activeQuestion = document.getElementById(`question-item-${activeIndex}`);
+  if (activeQuestion) {
+    activeQuestion.classList.add('active-question');
+  }
 }
 
 function showQuestion(index) {
@@ -1367,16 +1380,31 @@ function showQuestion(index) {
     // Enable recording for this question
     document.getElementById('record-btn').disabled = false;
     
-    // Reset recording state
+    // Reset recording state for new question
     document.getElementById('audio-playback').style.display = 'none';
     document.getElementById('feedback-controls').style.display = 'none';
     document.getElementById('interview-feedback').style.display = 'none';
+    document.getElementById('next-question-btn').style.display = 'none';
+    
+    // Reset recorded blob so they need to record again
+    recordedBlob = null;
+    audioChunks = [];
+    
+    // Update question indicator in the questions list
+    updateQuestionIndicator(index);
+    
+    console.log(`Showing question ${index + 1}: ${currentQuestions[index]}`);
   }
 }
 
 function nextQuestion() {
   if (currentQuestionIndex < currentQuestions.length - 1) {
     showQuestion(currentQuestionIndex + 1);
+    // Hide the next question button until they record and get feedback for this question
+    document.getElementById('next-question-btn').style.display = 'none';
+  } else {
+    // All questions completed
+    alert('You have completed all interview questions!');
   }
 }
 
