@@ -600,7 +600,6 @@ function displayRecommendations(recommendations) {
     const card = document.createElement('div');
     card.className = 'recommendation-card';
     card.innerHTML = `
-      <div class="recommendation-score">${(rec.relevance_score ?? 0)}/10</div>
       <div class="recommendation-content">
         <h3>${escapeHtml(rec.name || '')}</h3>
         <p><strong>Professor:</strong> ${escapeHtml(rec.professor || '')}</p>
@@ -830,7 +829,6 @@ function renderRAGCard(rec, indexInAll) {
 
   return `
     <div class="recommendation-card" data-index="${indexInAll}">
-      ${score != null ? `<div class="recommendation-score">${score}/10</div>` : ''}
       <div class="recommendation-content">
         <h3>${escapeHtml(name)}</h3>
         ${professor ? `<p><strong>Professor:</strong> ${escapeHtml(professor)}</p>` : ''}

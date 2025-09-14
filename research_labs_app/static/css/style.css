@@ -511,3 +511,16 @@ body::before {
   @media (max-width: 768px) {
     .email-body { max-height: 56vh; }
   }
+
+#rag-modal a,
+.email-body a,
+.rag-results a {
+  color: #66ccff !important;   /* light blue */
+  text-decoration: underline;
+}
+
+#rag-modal a:hover,
+.email-body a:hover,
+.rag-results a:hover {
+  color: var(--accent-2) !important;   /* purple on hover */
+}
