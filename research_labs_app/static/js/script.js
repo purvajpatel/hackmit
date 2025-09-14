@@ -299,6 +299,24 @@ function filterLabs() {
   const selectedSchool = (schoolFilter?.value || '').toLowerCase().trim();
   const selectedProfessor = (professorFilter?.value || '').toLowerCase().trim();
 
+  // Check if search term matches any professor names closely
+  const professorMatches = findProfessorMatches(searchTerm);
+  
+  if (searchTerm && professorMatches.length > 0 && !selectedSchool && !selectedProfessor) {
+    // Only show professor options if no other filters are applied
+    // and we have professor matches
+    const hasExactLabMatch = allLabs.some(lab => {
+      const name = (lab.name || '').toLowerCase();
+      return name.includes(searchTerm);
+    });
+    
+    // Prioritize professor matches over partial lab name matches
+    if (!hasExactLabMatch || professorMatches.some(p => p.name.toLowerCase().includes(searchTerm))) {
+      displayProfessorOptions(professorMatches, searchTerm);
+      return;
+    }
+  }
+
   filteredLabs = allLabs.filter(lab => {
     const name   = (lab.name || '').toLowerCase();
     const desc   = (lab.description || '').toLowerCase();
@@ -319,6 +337,140 @@ function filterLabs() {
 function loadMoreLabs() {
   currentPage++;
   displayLabs();
+}
+
+// -------------------- Professor Search Functions --------------------
+function findProfessorMatches(searchTerm) {
+  if (!searchTerm || searchTerm.length < 2) return [];
+  
+  const professors = new Map();
+  
+  allLabs.forEach(lab => {
+    const prof = (lab.professor || '').trim();
+    if (!prof || prof === 'Unknown') return;
+    
+    const profLower = prof.toLowerCase();
+    const searchLower = searchTerm.toLowerCase();
+    
+    // Check if search term matches professor name (partial match)
+    if (profLower.includes(searchLower) || 
+        prof.split(' ').some(part => part.toLowerCase().startsWith(searchLower))) {
+      
+      if (!professors.has(prof)) {
+        professors.set(prof, {
+          name: prof,
+          labs: [],
+          school: lab.school
+        });
+      }
+      professors.get(prof).labs.push(lab);
+    }
+  });
+  
+  return Array.from(professors.values());
+}
+
+function displayProfessorOptions(professorMatches, searchTerm) {
+  if (!labsGrid) return;
+  
+  labsGrid.innerHTML = '';
+  
+  // Add a header explaining the results
+  const header = document.createElement('div');
+  header.className = 'search-results-header';
+  header.style.cssText = 'grid-column: 1 / -1; text-align: center; padding: 20px; margin-bottom: 20px; background: var(--card-bg); border-radius: 12px; border: 1px solid var(--border-color);';
+  header.innerHTML = `
+    <h3 style="margin: 0 0 10px 0; color: var(--text-primary);">Found ${professorMatches.length} professor(s) matching "${escapeHtml(searchTerm)}"</h3>
+    <p style="margin: 0; color: var(--text-secondary);">Click on a professor to see their labs</p>
+  `;
+  labsGrid.appendChild(header);
+  
+  professorMatches.forEach(professor => {
+    const card = createProfessorCard(professor);
+    labsGrid.appendChild(card);
+  });
+  
+  // Hide load more button
+  if (loadMoreBtn) {
+    loadMoreBtn.style.display = 'none';
+  }
+}
+
+function createProfessorCard(professor) {
+  const card = document.createElement('div');
+  card.className = 'professor-card lab-card'; // Reuse lab-card styling
+  card.style.cursor = 'pointer';
+  
+  card.innerHTML = `
+    <div class="lab-header">
+      <div>
+        <h3 class="lab-name"><i class="fas fa-user-tie" style="margin-right: 8px; color: var(--primary-color);"></i>${escapeHtml(professor.name)}</h3>
+        <p class="lab-professor" style="color: var(--text-secondary);">Professor</p>
+      </div>
+    </div>
+    <p class="lab-school">${escapeHtml(professor.school || '')}</p>
+    <p class="lab-description">Click to view ${professor.labs.length} lab${professor.labs.length !== 1 ? 's' : ''} associated with this professor</p>
+    <div class="lab-actions">
+      <button class="btn btn-primary btn-small">
+        <i class="fas fa-flask"></i>
+        View Labs (${professor.labs.length})
+      </button>
+    </div>
+  `;
+  
+  card.addEventListener('click', () => {
+    showProfessorLabs(professor);
+  });
+  
+  return card;
+}
+
+function showProfessorLabs(professor) {
+  // Use the same modal system as RAG recommendations
+  const recommendations = professor.labs.map(lab => ({
+    name: lab.name,
+    professor: lab.professor,
+    school: lab.school,
+    url: lab.url,
+    description: lab.description,
+    professor_email: lab.professor_email || '',
+    relevance_score: null // No scoring for professor lab listings
+  }));
+  
+  // Store the recommendations globally for modal navigation
+  ragRecs = recommendations;
+  ragRecIndex = 0;
+  
+  // Render the modal with professor's labs
+  renderProfessorLabsModal(professor, recommendations);
+  openRagModal();
+}
+
+function renderProfessorLabsModal(professor, labs) {
+  const body = document.getElementById('rag-modal-body');
+  if (!body) return;
+  
+  // Update modal header to show professor info
+  const modalHeader = document.querySelector('#rag-modal .modal-header h3');
+  if (modalHeader) {
+    modalHeader.innerHTML = `<i class="fas fa-user-tie"></i> ${escapeHtml(professor.name)} - Research Labs`;
+  }
+  
+  if (labs.length === 1) {
+    // Single lab - show directly
+    const cardHtml = renderRAGCard(labs[0], 0);
+    body.innerHTML = `
+      <div class="rag-slide">
+        ${cardHtml}
+        <div style="margin-top: 20px; text-align: center;">
+          <button class="btn btn-secondary" onclick="closeRagModal()">Close</button>
+        </div>
+      </div>
+    `;
+  } else {
+    // Multiple labs - show with navigation
+    renderRAGModalSlide(0);
+  }
 }
 
 // -------------------- Lab Modal --------------------
@@ -717,6 +869,12 @@ function closeRagModal() {
   if (!modal) return;
   modal.style.display = 'none';
   document.body.style.overflow = 'auto';
+  
+  // Reset modal header to default
+  const modalHeader = document.querySelector('#rag-modal .modal-header h3');
+  if (modalHeader) {
+    modalHeader.innerHTML = '<i class="fas fa-magic"></i> AI Analysis Results';
+  }
 }
 
 // Backdrop click closes RAG modal
