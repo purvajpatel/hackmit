@@ -1,921 +1,498 @@
 [
-    {
-        "name": "3D Studio",
-        "professor": "Andrew F. Scott and Roxanne Minnish",
-        "url": "https://labs.utdallas.edu/3d-studio/",
-        "school": "Harry W. Bass Jr. School of Arts, Humanities, and Technology",
-        "description": "Focuses on creative research in 3D fabrication, digital design, and interdisciplinary art, supporting sculpture, digital modeling, and emerging technologies."
-    },
-    {
-        "name": "Anechoic Chamber and Transmedia Studio",
-        "professor": "Dean Terry",
-        "url": "https://bass.utdallas.edu/research/anechoic-chamber-and-transmedia-studio/",
-        "school": "Harry W. Bass Jr. School of Arts, Humanities, and Technology",
-        "description": "A specialized facility for sound research, immersive audio, and experimental media, offering resources for transmedia storytelling and acoustic innovation."
-    },
-    {
-        "name": "ArtSciLab",
-        "professor": "Roger Malina and Kathryn Evans",
-        "url": "https://artscilab.utdallas.edu/",
-        "school": "Harry W. Bass Jr. School of Arts, Humanities, and Technology",
-        "description": "An interdisciplinary lab where artists and scientists collaborate on projects bridging art, science, and technology, emphasizing research, creative production, and public engagement."
-    },
-    {
-        "name": "CG Animation Lab",
-        "professor": "Unknown",
-        "url": "https://atec-animgames.com/",
-        "school": "Harry W. Bass Jr. School of Arts, Humanities, and Technology",
-        "description": "Dedicated to computer graphics, animation, and interactive media, supporting student projects and research in digital animation and game development."
-    },
-    {
-        "name": "Critical Media Studies Lab",
-        "professor": "Dr. Heidi Rae Cooley",
-        "url": "https://bass.utdallas.edu/research/critical-media-studies-lab/",
-        "school": "Harry W. Bass Jr. School of Arts, Humanities, and Technology",
-        "description": "Examines the social, cultural, and political impact of media technologies through projects analyzing digital culture, media theory, and critical practice."
-    },
-    {
-        "name": "experimenta.l.",
-        "professor": "Dr. Christine Veras",
-        "url": "https://labs.utdallas.edu/experimental",
-        "school": "Harry W. Bass Jr. School of Arts, Humanities, and Technology",
-        "description": "Explores experimental animation, visual storytelling, and innovative media forms, fostering research and artistic experimentation in moving images."
-    },
-    {
-        "name": "Game Lab",
-        "professor": "Unknown",
-        "url": "https://atec-animgames.com/",
-        "school": "Harry W. Bass Jr. School of Arts, Humanities, and Technology",
-        "description": "A collaborative space for designing, developing, and researching games, focusing on interactive entertainment, game design, and digital storytelling."
-    },
-    {
-        "name": "Games Research Lab",
-        "professor": "Tim Christopher and Monica Evans",
-        "url": "https://bass.utdallas.edu/research/games-research-lab/",
-        "school": "Harry W. Bass Jr. School of Arts, Humanities, and Technology",
-        "description": "Dedicated to the study and creation of games, examining game mechanics, player experience, and the cultural significance of games in society."
-    },
-    {
-        "name": "LabSynthE",
-        "professor": "Xtine Burrough and Frank Dufour",
-        "url": "https://labs.utdallas.edu/labsynthe/",
-        "school": "Harry W. Bass Jr. School of Arts, Humanities, and Technology",
-        "description": "An experimental lab for electronic literature, sound art, and interdisciplinary digital projects, integrating creative writing, audio, and interactive media."
-    },
-    {
-        "name": "Mograph Lab",
-        "professor": "Eric Farrar",
-        "url": "https://bass.utdallas.edu/research/mograph-lab/",
-        "school": "Harry W. Bass Jr. School of Arts, Humanities, and Technology",
-        "description": "Specializes in motion graphics, animation, and visual effects for digital media and storytelling."
-    },
-    {
-        "name": "Motion Capture Lab",
-        "professor": "Adam Buxkamper",
-        "url": "https://bass.utdallas.edu/research/mocap-lab/",
-        "school": "Harry W. Bass Jr. School of Arts, Humanities, and Technology",
-        "description": "Equipped for motion capture research and production, supporting animation, biomechanics, and interactive media projects."
-    },
-    {
-        "name": "Narrative Systems Research Lab",
-        "professor": "Monica Evans",
-        "url": "https://bass.utdallas.edu/research/narrative-systems-research-lab/",
-        "school": "Harry W. Bass Jr. School of Arts, Humanities, and Technology",
-        "description": "Focuses on interactive storytelling, narrative design, and the study of narrative systems in games and digital media."
-    },
-    {
-        "name": "Public Interactives Research Lab (PIRL)",
-        "professor": "Anne Balsamo and Heidi Rae Cooley",
-        "url": "https://labs.utdallas.edu/public-interactives/",
-        "school": "Harry W. Bass Jr. School of Arts, Humanities, and Technology",
-        "description": "Investigates public interactives, digital installations, and participatory media, with projects engaging communities and public spaces."
-    },
-    {
-        "name": "The Studio for Mediating Play",
-        "professor": "Dr. Josef Nguyen and Dr. Hong-An Wu",
-        "url": "https://mediatingplay.net/",
-        "school": "Harry W. Bass Jr. School of Arts, Humanities, and Technology",
-        "description": "Researches play, games, and interactive media, examining how play mediates social, cultural, and technological experiences."
-    },
-    {
-        "name": "Abdi Personal Website",
-        "professor": "Dr. Hervé Abdi",
-        "url": "https://personal.utdallas.edu/~herve/",
-        "school": "School of Behavioral and Brain Sciences",
-        "description": "Personal academic website featuring research, publications, and resources in cognitive psychology and statistics."
-    },
-    {
-        "name": "Action, Cognition & Translational Neuroscience Lab",
-        "professor": "Dr. Jerillyn Kent",
-        "url": "https://labs.utdallas.edu/actnlab/",
-        "school": "School of Behavioral and Brain Sciences",
-        "description": "Researches the neural and cognitive mechanisms underlying action, cognition, and their translation to clinical populations."
-    },
-    {
-        "name": "Aging & Memory Research Laboratory",
-        "professor": "Dr. Tres Thompson",
-        "url": "https://apps.utdallas.edu/bbs/agingmemorylab/",
-        "school": "School of Behavioral and Brain Sciences",
-        "description": "Studies the effects of aging on memory and cognition, with a focus on neurobiological and behavioral processes."
-    },
-    {
-        "name": "Aging Well Lab",
-        "professor": "Dr. Kendra Seaman",
-        "url": "https://agingwell.utdallas.edu/",
-        "school": "School of Behavioral and Brain Sciences",
-        "description": "Explores psychological and behavioral factors promoting healthy aging and well-being in older adults."
-    },
-    {
-        "name": "Axon Biology and Neuroinformatics Lab",
-        "professor": "Dr. Diana Tavares Ferreira",
-        "url": "https://labs.utdallas.edu/axonlab/",
-        "school": "School of Behavioral and Brain Sciences",
-        "description": "Investigates axon biology, neural connectivity, and neuroinformatics using experimental and computational approaches."
-    },
-    {
-        "name": "CARE Lab",
-        "professor": "Dr. Jennifer Callahan",
-        "url": "https://texasnabors.org/care-lab/",
-        "school": "School of Behavioral and Brain Sciences",
-        "description": "Focuses on clinical assessment, research, and education in neuropsychology and behavioral health."
-    },
-    {
-        "name": "Cellular and Synaptic Physiology Lab",
-        "professor": "Dr. Sven Kroener",
-        "url": "https://labs.utdallas.edu/csp/",
-        "school": "School of Behavioral and Brain Sciences",
-        "description": "Studies the physiology of neurons and synapses, focusing on mechanisms underlying learning, memory, and psychiatric disorders."
-    },
-    {
-        "name": "Child Language and Cognitive Processes Laboratory",
-        "professor": "Dr. Julia Evans",
-        "url": "https://labs.utdallas.edu/childlanglab/",
-        "school": "School of Behavioral and Brain Sciences",
-        "description": "Researches language development and cognitive processes in children, including typical and atypical populations."
-    },
-    {
-        "name": "Children and Families Lab",
-        "professor": "Dr. Margaret Owen",
-        "url": "https://labs.utdallas.edu/children-and-families-lab/",
-        "school": "School of Behavioral and Brain Sciences",
-        "description": "Examines child development within the context of family relationships and environmental factors."
-    },
-    {
-        "name": "Cognitive & Computational Neuroscience (CoCo-Neuro) Lab",
-        "professor": "Dr. Jiahui Guo",
-        "url": "https://labs.utdallas.edu/coconeurolab/",
-        "school": "School of Behavioral and Brain Sciences",
-        "description": "Combines cognitive neuroscience and computational modeling to study brain function and behavior."
-    },
-    {
-        "name": "Cognitive Informatics and Statistics Lab",
-        "professor": "Dr. Richard Golden",
-        "url": "https://labs.utdallas.edu/coinslab/",
-        "school": "School of Behavioral and Brain Sciences",
-        "description": "Focuses on cognitive informatics, statistical modeling, and computational approaches to understanding cognition."
-    },
-    {
-        "name": "Cognitive Neuroscience of Aging Lab",
-        "professor": "Dr. Karen Rodrigue",
-        "url": "https://healthybrain.utdallas.edu/",
-        "school": "School of Behavioral and Brain Sciences",
-        "description": "Studies brain aging, cognitive decline, and factors influencing healthy brain function in older adults."
-    },
-    {
-        "name": "Cognitive Neuroscience Laboratory of Memory and Language",
-        "professor": "Dr. John Hart",
-        "url": "https://labs.utdallas.edu/memory/",
-        "school": "School of Behavioral and Brain Sciences",
-        "description": "Researches the neural basis of memory and language using neuroimaging and behavioral methods."
-    },
-    {
-        "name": "COMPASS of Psychopathology Lab",
-        "professor": "Dr. Camilo Ruggero",
-        "url": "https://texasnabors.org/compass-of-psych-lab/",
-        "school": "School of Behavioral and Brain Sciences",
-        "description": "Investigates the classification and assessment of psychopathology using clinical and research approaches."
-    },
-    {
-        "name": "Computational Neuropsychology & Affective Neuroscience Lab",
-        "professor": "Dr. Stacie Warren",
-        "url": "https://labs.utdallas.edu/cnanlab/",
-        "school": "School of Behavioral and Brain Sciences",
-        "description": "Studies neuropsychological and affective processes using computational and experimental techniques."
-    },
-    {
-        "name": "Cortical Plasticity Laboratory",
-        "professor": "Dr. Michael Kilgard",
-        "url": "https://personal.utdallas.edu/~kilgard/",
-        "school": "School of Behavioral and Brain Sciences",
-        "description": "Explores mechanisms of cortical plasticity and neural adaptation in health and disease."
-    },
-    {
-        "name": "D’Mello Lab",
-        "professor": "Dr. Anila D’Mello",
-        "url": "https://www.dmellolab.com/home",
-        "school": "School of Behavioral and Brain Sciences",
-        "description": "Researches brain development, neurodiversity, and cognitive neuroscience using neuroimaging and behavioral methods."
-    },
-    {
-        "name": "Developmental Affective, Motor, Memory, & Imaging (DAMMI) Lab",
-        "professor": "Dr. Katherine Damme",
-        "url": "https://labs.utdallas.edu/abcneurodevlab/",
-        "school": "School of Behavioral and Brain Sciences",
-        "description": "Studies affective, motor, and memory development using neuroimaging and behavioral approaches."
-    },
-    {
-        "name": "Developmental and Maternal Neurobiology Lab",
-        "professor": "Dr. Millie Rincón-Cortés",
-        "url": "https://labs.utdallas.edu/madrelab/",
-        "school": "School of Behavioral and Brain Sciences",
-        "description": "Examines neurobiological mechanisms of maternal behavior and development."
-    },
-    {
-        "name": "Developmental Neurolinguistics Laboratory",
-        "professor": "Dr Mandy Maguire",
-        "url": "https://labs.utdallas.edu/brainlab/",
-        "school": "School of Behavioral and Brain Sciences",
-        "description": "Researches language development and neurolinguistics in children using behavioral and neuroimaging methods."
-    },
-    {
-        "name": "Developmental Social Affective Neuroscience Lab",
-        "professor": "Dr. Leehyun Yoon",
-        "url": "https://labs.utdallas.edu/dsanlab/",
-        "school": "School of Behavioral and Brain Sciences",
-        "description": "Studies the development of social and affective processes in the brain across the lifespan."
-    },
-    {
-        "name": "Eagle Neuro Lab",
-        "professor": "Dr. Andrew Eagle",
-        "url": "https://labs.utdallas.edu/eagleneurolab/",
-        "school": "School of Behavioral and Brain Sciences",
-        "description": "Investigates neural circuits and behavior using experimental neuroscience techniques."
-    },
-    {
-        "name": "Engineer Lab",
-        "professor": "Dr. Crystal Engineer",
-        "url": "https://txbdc.utdallas.edu/engineer/",
-        "school": "School of Behavioral and Brain Sciences",
-        "description": "Focuses on neural engineering, auditory neuroscience, and brain-computer interfaces."
-    },
-    {
-        "name": "Face Perception Research Lab",
-        "professor": "Dr. Alice O’Toole",
-        "url": "https://labs.utdallas.edu/facelab/",
-        "school": "School of Behavioral and Brain Sciences",
-        "description": "Studies face perception, recognition, and computational modeling of facial processing."
-    },
-    {
-        "name": "Family Research Lab",
-        "professor": "Dr. Jackie Nelson",
-        "url": "https://labs.utdallas.edu/familyresearchlab/",
-        "school": "School of Behavioral and Brain Sciences",
-        "description": "Examines family dynamics, parenting, and child development through research and community engagement."
-    },
-    {
-        "name": "fNIM Laboratory",
-        "professor": "Dr. Michael Rugg",
-        "url": "https://fnim.utdallas.edu/",
-        "school": "School of Behavioral and Brain Sciences",
-        "description": "Uses functional neuroimaging to study memory, cognition, and brain function."
-    },
-    {
-        "name": "Gut, Brain, Pain Lab",
-        "professor": "Dr. Katelyn Sadler",
-        "url": "https://labs.utdallas.edu/gutbrainpainlab/",
-        "school": "School of Behavioral and Brain Sciences",
-        "description": "Researches interactions between the gut, brain, and pain systems in health and disease."
-    },
-    {
-        "name": "Healthy Development Project",
-        "professor": "Dr. Shayla Holub",
-        "url": "https://labs.utdallas.edu/healthydevelopmentproject/",
-        "school": "School of Behavioral and Brain Sciences",
-        "description": "Focuses on promoting healthy development in children and adolescents."
-    },
-    {
-        "name": "Hearing Health Lab",
-        "professor": "Dr. Linda Thibodeau",
-        "url": "https://labs.utdallas.edu/hhlab/",
-        "school": "School of Behavioral and Brain Sciences",
-        "description": "Studies hearing health, auditory processing, and interventions for hearing loss."
-    },
-    {
-        "name": "Infant Learning Project",
-        "professor": "Dr. Melanie Spence",
-        "url": "https://labs.utdallas.edu/ilp/",
-        "school": "School of Behavioral and Brain Sciences",
-        "description": "Investigates how infants learn about language, sound, and their environment."
-    },
-    {
-        "name": "Integrative Laryngeal BioPhysiology Lab",
-        "professor": "Dr. Adrianna Shembel",
-        "url": "https://labs.utdallas.edu/larynxlab/",
-        "school": "School of Behavioral and Brain Sciences",
-        "description": "Studies the physiology and biomechanics of the larynx and voice disorders."
-    },
-    {
-        "name": "Kennedy Neuroimaging of Aging and Cognition (KNAC) Lab",
-        "professor": "Dr. Kristen Kennedy",
-        "url": "https://knaclab.utdallas.edu/",
-        "school": "School of Behavioral and Brain Sciences",
-        "description": "Uses neuroimaging to study aging, cognition, and brain health."
-    },
-    {
-        "name": "Laboratory for Healthy Social-Emotional Development",
-        "professor": "Dr. Alva Tang",
-        "url": "https://labs.utdallas.edu/devlab/",
-        "school": "School of Behavioral and Brain Sciences",
-        "description": "Researches social-emotional development and well-being in children and adolescents."
-    },
-    {
-        "name": "Language Interaction and Language Acquisition in Children (LILAC) Lab",
-        "professor": "Dr. “Pumpki” Lei Su",
-        "url": "https://labs.utdallas.edu/lilac-lab/",
-        "school": "School of Behavioral and Brain Sciences",
-        "description": "Studies language acquisition and interaction in children, focusing on bilingualism and language development."
-    },
-    {
-        "name": "Lifespan Neuroscience and Cognition (LiNC) Laboratory",
-        "professor": "Dr. Chandramallika Basak",
-        "url": "https://linc.utdallas.edu",
-        "school": "School of Behavioral and Brain Sciences",
-        "description": "Examines cognitive and brain changes across the lifespan using behavioral and neuroimaging methods."
-    },
-    {
-        "name": "Motivational, Affective, and Cognitive Systems",
-        "professor": "Dr. Puja Parekh",
-        "url": "https://pkpare.github.io/Parekh_lab_website/",
-        "school": "School of Behavioral and Brain Sciences",
-        "description": "Studies motivation, affect, and cognitive systems in the brain using experimental and computational approaches."
-    },
-    {
-        "name": "Motor and Habit Learning Lab",
-        "professor": "Dr. Catherine Thorn",
-        "url": "https://labs.utdallas.edu/habitlearninglab/",
-        "school": "School of Behavioral and Brain Sciences",
-        "description": "Researches the neural basis of motor skills and habit learning."
-    },
-    {
-        "name": "Neuroaudiology Lab",
-        "professor": "Dr. Kelly Jahn",
-        "url": "https://labs.utdallas.edu/neuro-aud-lab/",
-        "school": "School of Behavioral and Brain Sciences",
-        "description": "Studies the neural mechanisms of hearing and auditory processing."
-    },
-    {
-        "name": "Neurobiology of Basal Ganglia Function and Dysfunction",
-        "professor": "Dr. Zirong Gu",
-        "url": "https://labs.utdallas.edu/ganglia-guardian-lab/",
-        "school": "School of Behavioral and Brain Sciences",
-        "description": "Investigates the function and dysfunction of basal ganglia circuits in health and disease."
-    },
-    {
-        "name": "Neurobiology of Memory Lab",
-        "professor": "Dr. Christa McIntyre",
-        "url": "https://labs.utdallas.edu/neurobiologyofmemorylab/",
-        "school": "School of Behavioral and Brain Sciences",
-        "description": "Explores the neurobiological mechanisms underlying memory formation and retention."
-    },
-    {
-        "name": "Neurodevelopmental Disorders and Epilepsy Lab",
-        "professor": "Dr. Lena Nguyen",
-        "url": "https://labs.utdallas.edu/ndd-epilepsy-lab/",
-        "school": "School of Behavioral and Brain Sciences",
-        "description": "Focuses on neurodevelopmental disorders and epilepsy, using clinical and basic science approaches."
-    },
-    {
-        "name": "Neuroimaging of Reward Dynamics Lab (NiRD)",
-        "professor": "Dr. Francesca Filbey",
-        "url": "https://labs.utdallas.edu/filbeylab/",
-        "school": "School of Behavioral and Brain Sciences",
-        "description": "Uses neuroimaging to study reward processing and addiction in the human brain."
-    },
-    {
-        "name": "Neuroimmunology and Behavior Lab",
-        "professor": "Dr. Michael Burton",
-        "url": "https://labs.utdallas.edu/niblab/",
-        "school": "School of Behavioral and Brain Sciences",
-        "description": "Researches interactions between the immune system and behavior, focusing on pain and neuroinflammation."
-    },
-    {
-        "name": "NeuroPsychometric Research (NPR) Laboratory",
-        "professor": "Dr. Bart Rypma",
-        "url": "https://labs.utdallas.edu/nprlab/",
-        "school": "School of Behavioral and Brain Sciences",
-        "description": "Studies cognitive and neuropsychometric assessment, brain function, and aging."
-    },
-    {
-        "name": "NOISE Lab",
-        "professor": "Dr. Colleen Le Prell",
-        "url": "https://labs.utdallas.edu/noiselab/",
-        "school": "School of Behavioral and Brain Sciences",
-        "description": "Focuses on hearing loss, noise exposure, and auditory health research."
-    },
-    {
-        "name": "Pain Neurobiology Research Group",
-        "professor": "Dr. Greg Dussor and Dr. Ted Price",
-        "url": "https://labs.utdallas.edu/painneurosciencelab/",
-        "school": "School of Behavioral and Brain Sciences",
-        "description": "Investigates the neurobiology of pain and the development of new pain therapies."
-    },
-    {
-        "name": "Pain Stress Lab",
-        "professor": "Dr. Benedict Kolber",
-        "url": "https://labs.utdallas.edu/painstresslab/",
-        "school": "School of Behavioral and Brain Sciences",
-        "description": "Studies the relationship between pain, stress, and brain function."
-    },
-    {
-        "name": "Park Aging Mind Laboratory",
-        "professor": "Dr. Denise Park",
-        "url": "http://agingmind.utdallas.edu/",
-        "school": "School of Behavioral and Brain Sciences",
-        "description": "Researches cognitive aging, memory, and brain health in older adults."
-    },
-    {
-        "name": "Reasoning Lab",
-        "professor": "Dr. Dan Krawczyk",
-        "url": "https://labs.utdallas.edu/reasoninglab/",
-        "school": "School of Behavioral and Brain Sciences",
-        "description": "Explores the neural and cognitive mechanisms underlying reasoning and decision-making."
-    },
-    {
-        "name": "SLAM Lab",
-        "professor": "Dr. Yune Lee",
-        "url": "https://utd-slam.github.io/",
-        "school": "School of Behavioral and Brain Sciences",
-        "description": "Researches speech, language, and music cognition using behavioral and neuroimaging methods."
-    },
-    {
-        "name": "Social Cognition and Interaction in Autism Lab",
-        "professor": "Dr. Noah Sasson",
-        "url": "https://labs.utdallas.edu/sassonlab/",
-        "school": "School of Behavioral and Brain Sciences",
-        "description": "Studies social cognition and interaction in individuals with autism spectrum disorders."
-    },
-    {
-        "name": "Social Communication Lab",
-        "professor": "Dr. Pamela Rollins",
-        "url": "https://labs.utdallas.edu/socialcommunicationlab/",
-        "school": "School of Behavioral and Brain Sciences",
-        "description": "Focuses on social communication development and intervention in children with autism."
-    },
-    {
-        "name": "Social Psychology Research on INtercultural Groups Lab (SPRING Lab)",
-        "professor": "Dr. BoKyung Park",
-        "url": "https://labs.utdallas.edu/spring/",
-        "school": "School of Behavioral and Brain Sciences",
-        "description": "Researches social psychology, intercultural interactions, and group dynamics."
-    },
-    {
-        "name": "Solodkin/Small Brain Circuits Laboratory",
-        "professor": "Dr. Ana Solodkin and Dr. Steven Small",
-        "url": "https://labs.utdallas.edu/braincircuits/",
-        "school": "School of Behavioral and Brain Sciences",
-        "description": "Explores brain circuits underlying movement, cognition, and neurological disorders."
-    },
-    {
-        "name": "Speech Neuroscience Lab",
-        "professor": "Dr. Roozbeh Behroozmand",
-        "url": "https://labs.utdallas.edu/speech-neuroscience-lab/",
-        "school": "School of Behavioral and Brain Sciences",
-        "description": "Studies the neural mechanisms of speech production and perception."
-    },
-    {
-        "name": "Texas Pain Research Consortium",
-        "professor": "Drs. Greg Dussor, Ted Price, Michael Burton, Bendict Kolber and Katelyn Sadler",
-        "url": "https://labs.utdallas.edu/tprc/",
-        "school": "School of Behavioral and Brain Sciences",
-        "description": "A collaborative research group dedicated to advancing the understanding and treatment of pain. They bring together researchers from various disciplines to investigate the mechanisms underlying chronic pain conditions and develop novel therapeutic strategies."
-    },
-    {
-        "name": "The CHildren & Infant Listening Laboratory (CHILL)",
-        "professor": "Dr. Andrea Warner-Czyz",
-        "url": "https://labs.utdallas.edu/chill/",
-        "school": "School of Behavioral and Brain Sciences",
-        "description": "Examines auditory development in infants and children, focusing on how hearing loss and early intervention impact speech and language acquisition. The lab uses behavioral and electrophysiological measures to assess auditory processing skills."
-    },
-    {
-        "name": "The Close Relationships and Health Lab",
-        "professor": "Dr. Heidi Kane",
-        "url": "https://labs.utdallas.edu/crhlab/",
-        "school": "School of Behavioral and Brain Sciences",
-        "description": "Investigates the interplay between close relationships and health outcomes, with a focus on how relationship dynamics, stress, and social support influence physical and mental well-being. Research methods include surveys, physiological measures, and observational studies."
-    },
-    {
-        "name": "The Personality And Interpersonal Relationships (Pair) Laboratory",
-        "professor": "Dr. Robert Ackerman",
-        "url": "https://labs.utdallas.edu/pairlab/",
-        "school": "School of Behavioral and Brain Sciences",
-        "description": "Studies the connections between personality traits and interpersonal relationships, exploring topics such as attachment styles, relationship satisfaction, and the role of personality in social interactions. The lab employs a variety of research methods, including self-report questionnaires and behavioral experiments."
-    },
-    {
-        "name": "The Schizophrenia and Social Cognition Lab",
-        "professor": "Dr. Amy Pinkham",
-        "url": "https://labs.utdallas.edu/schizophrenialab/",
-        "school": "School of Behavioral and Brain Sciences",
-        "description": "Focuses on understanding social cognition deficits in individuals with schizophrenia, examining how these deficits impact social functioning and daily life. The lab uses neuropsychological assessments, eye-tracking technology, and social skills training interventions."
-    },
-    {
-        "name": "Think Lab",
-        "professor": "Dr. Candice Mills",
-        "url": "https://labs.utdallas.edu/thinklab/",
-        "school": "School of Behavioral and Brain Sciences",
-        "description": "Examines how children and adults learn and reason about the world, with a focus on the development of critical thinking skills, belief formation, and understanding of complex concepts. The lab uses experimental methods to investigate cognitive processes and learning strategies."
-    },
-    {
-        "name": "Translational Auditory Perception (TAP) Lab",
-        "professor": "Dr. Edward Lobariñas",
-        "url": "https://labs.utdallas.edu/taplab/",
-        "school": "School of Behavioral and Brain Sciences",
-        "description": "Studies auditory perception and its clinical applications, focusing on developing and evaluating interventions for individuals with hearing loss and other auditory disorders. The lab uses a combination of behavioral, electrophysiological, and computational methods."
-    },
-    {
-        "name": "VNS Stroke Trial",
-        "professor": "Dr. Michael Kilgard",
-        "url": "https://txbdc.utdallas.edu/trials/stroke/index.html",
-        "school": "School of Behavioral and Brain Sciences",
-        "description": "Investigates the use of vagus nerve stimulation (VNS) as a therapy to improve motor function in stroke survivors. The trial assesses the safety and efficacy of VNS paired with rehabilitation exercises to promote neural plasticity and functional recovery."
-    },
-    {
-        "name": "Wig Neuroimaging Lab",
-        "professor": "Dr. Gagan Wig",
-        "url": "https://www.wigneurolab.org/",
-        "school": "School of Behavioral and Brain Sciences",
-        "description": "Uses neuroimaging techniques, such as fMRI, to study the neural basis of cognition and behavior, with a focus on understanding the brain's default mode network and its role in self-referential thought, memory, and social cognition."
-    },
-    {
-        "name": "Algorithms and Theory Group",
-        "professor": "Dr. Sergey Bereg, Dr. Ovidiu Daescu, Dr. Kyle Fox, and Dr. Benjamin Raichel",
-        "url": "https://labs.utdallas.edu/atg/",
-        "school": "Erik Jonsson School of Engineering and Computer Science",
-        "description": "Conducts theoretical research in algorithms and data structures, with a focus on developing efficient solutions to fundamental problems in computer science. Areas of interest include computational geometry, graph algorithms, and approximation algorithms."
-    },
-    {
-        "name": "Applied Research for Mobility Systems Lab",
-        "professor": "Dr. Zejiang Wang",
-        "url": "https://labs.utdallas.edu/arms/",
-        "school": "Erik Jonsson School of Engineering and Computer Science",
-        "description": "Focuses on applied research in mobility systems, including areas such as robotics, autonomous vehicles, and intelligent transportation systems. The lab develops algorithms and technologies for perception, navigation, and control of mobile robots and vehicles."
-    },
-    {
-        "name": "Comprehensive Advanced Manufacturing Lab",
-        "professor": "Dr. Wei Li",
-        "url": "https://labs.utdallas.edu/caml/",
-        "school": "Erik Jonsson School of Engineering and Computer Science",
-        "description": "Dedicated to advanced manufacturing research, focusing on innovative technologies and processes for creating high-quality products efficiently and sustainably. Research areas include additive manufacturing, smart manufacturing, and advanced materials processing."
-    },
-    {
-        "name": "Computational Fluid Dynamics (CFD) Laboratory",
-        "professor": "Dr. Stefano Leonardi",
-        "url": "https://www.utdallas.edu/cfd/",
-        "school": "Erik Jonsson School of Engineering and Computer Science",
-        "description": "Employs computational techniques to study fluid flow and heat transfer phenomena, with applications in areas such as aerospace engineering, energy systems, and environmental science. The lab uses high-performance computing to simulate complex fluid flows and optimize engineering designs."
-    },
-    {
-        "name": "Computational Research in Advanced Manufacturing",
-        "professor": "Dr. Arif Malik",
-        "url": "https://crm.utdallas.edu/",
-        "school": "Erik Jonsson School of Engineering and Computer Science",
-        "description": "Focuses on computational modeling and simulation of manufacturing processes, with the goal of improving efficiency, quality, and sustainability. Research areas include process optimization, materials design, and predictive maintenance."
-    },
-    {
-        "name": "Control, Optimization, and Networks Lab (CONLab)",
-        "professor": "Dr. Tyler Summers",
-        "url": "https://labs.utdallas.edu/conlab/",
-        "school": "Erik Jonsson School of Engineering and Computer Science",
-        "description": "Conducts research in control theory, optimization, and network science, with applications in areas such as robotics, power systems, and social networks. The lab develops algorithms and tools for designing and controlling complex systems."
-    },
-    {
-        "name": "Dai Lab",
-        "professor": "Dr. Xianming Dai",
-        "url": "https://labs.utdallas.edu/dai/",
-        "school": "Erik Jonsson School of Engineering and Computer Science",
-        "description": "Focuses on micro- and nano-scale devices and systems, with applications in areas such as sensing, energy harvesting, and biomedical engineering. The lab develops novel materials, devices, and fabrication techniques for creating high-performance micro- and nano-systems."
-    },
-    {
-        "name": "Energy Storage Systems Lab",
-        "professor": "Dr. Stephen Yurkovich",
-        "url": "https://www.utdallas.edu/essl/",
-        "school": "Erik Jonsson School of Engineering and Computer Science",
-        "description": "Dedicated to energy storage research, focusing on developing advanced battery technologies and energy management systems. The lab conducts research on battery materials, cell design, and control algorithms for improving battery performance and lifespan."
-    },
-    {
-        "name": "Energy Systems Control Laboratory",
-        "professor": "Dr. Justin Koeln",
-        "url": "https://www.utdallas.edu/escl/",
-        "school": "Erik Jonsson School of Engineering and Computer Science",
-        "description": "Focuses on the control and optimization of energy systems, with applications in areas such as power grids, renewable energy, and smart buildings. The lab develops algorithms and tools for improving the efficiency, reliability, and sustainability of energy systems."
-    },
-    {
-        "name": "Fluids, Turbulence Control & Renewable Energy Lab",
-        "professor": "Dr. Yaqing Jin",
-        "url": "https://labs.utdallas.edu/ftr",
-        "school": "Erik Jonsson School of Engineering and Computer Science",
-        "description": "Conducts research in fluid mechanics, turbulence control, and renewable energy, with a focus on developing innovative solutions for improving energy efficiency and reducing environmental impact. The lab uses experimental and computational methods to study fluid flows and optimize energy systems."
-    },
-    {
-        "name": "Griffith Lab",
-        "professor": "Dr. Todd Griffith",
-        "url": "https://labs.utdallas.edu/griffith/",
-        "school": "Erik Jonsson School of Engineering and Computer Science",
-        "description": "Focuses on the design and control of robotic systems, with applications in areas such as manufacturing, healthcare, and exploration. The lab develops algorithms and hardware for creating robots that can perform complex tasks in unstructured environments."
-    },
-    {
-        "name": "In-Fusion",
-        "professor": "Unknown",
-        "url": "https://labs.utdallas.edu/infusion",
-        "school": "Erik Jonsson School of Engineering and Computer Science",
-        "description": "Focuses on research in the field of human-computer interaction, exploring new ways to seamlessly integrate technology into everyday life. The lab investigates topics such as augmented reality, wearable computing, and personalized interfaces to enhance user experience and productivity."
-    },
-    {
-        "name": "Intelligent Robotics and Vision Lab",
-        "professor": "Dr. Yu Xiang",
-        "url": "https://labs.utdallas.edu/irvl/",
-        "school": "Erik Jonsson School of Engineering and Computer Science",
-        "description": "Focuses on research in computer vision and robotics, developing algorithms and systems for enabling robots to perceive and interact with the world. Areas of interest include object recognition, scene understanding, and robot navigation."
-    },
-    {
-        "name": "Image-Guided Drug Delivery Lab",
-        "professor": "Dr. Shashank Sirsi",
-        "url": "https://labs.utdallas.edu/iddl/",
-        "school": "Erik Jonsson School of Engineering and Computer Science",
-        "description": "Focuses on developing novel techniques for targeted drug delivery using ultrasound imaging. The lab investigates methods for enhancing drug penetration, controlling drug release, and monitoring treatment response in real-time."
-    },
-    {
-        "name": "Lab of Developmental Systems Biology",
-        "professor": "Dr. Chen Cao",
-        "url": "https://labs.utdallas.edu/caolab/",
-        "school": "Erik Jonsson School of Engineering and Computer Science",
-        "description": "Dedicated to understanding the fundamental principles of developmental biology using systems-level approaches. The lab investigates how genes, molecules, and cells interact to orchestrate the development of complex organisms."
-    },
-    {
-        "name": "Mechanics of Advanced Materials Laboratory (MAML)",
-        "professor": "Dr. Hongbing Lu",
-        "url": "https://www.utdallas.edu/maml/",
-        "school": "Erik Jonsson School of Engineering and Computer Science",
-        "description": "Focuses on the mechanical behavior of advanced materials, including composites, nanomaterials, and biomaterials. The lab uses experimental and computational methods to characterize material properties, predict material performance, and design new materials for engineering applications."
-    },
-    {
-        "name": "Michael Zhang Computational Biology Laboratory",
-        "professor": "Dr. Michael Zhang",
-        "url": "https://labs.utdallas.edu/zhanglab",
-        "school": "Erik Jonsson School of Engineering and Computer Science",
-        "description": "Focuses on developing computational methods for analyzing biological data, with applications in genomics, proteomics, and systems biology. The lab investigates topics such as gene regulation, protein structure prediction, and disease modeling."
-    },
-    {
-        "name": "Micro/Nano Devices and Systems Lab (MiNDS)",
-        "professor": "Dr. JB Lee",
-        "url": "https://www.utdallas.edu/mems/",
-        "school": "Erik Jonsson School of Engineering and Computer Science",
-        "description": "Dedicated to the design, fabrication, and characterization of micro- and nano-scale devices and systems. The lab investigates applications in areas such as sensing, energy harvesting, and biomedical engineering."
-    },
-    {
-        "name": "Multimedia Lab",
-        "professor": "Dr. B. Prabhakaran",
-        "url": "https://labs.utdallas.edu/multimedialab/",
-        "school": "Erik Jonsson School of Engineering and Computer Science",
-        "description": "Focuses on research in multimedia computing, with a focus on developing new techniques for multimedia content analysis, retrieval, and communication. Areas of interest include image and video processing, multimedia databases, and multimedia networking."
-    },
-    {
-        "name": "Multiscale Simulation Lab",
-        "professor": "Dr. KJ Cho",
-        "url": "https://www.utdallas.edu/msl/",
-        "school": "Erik Jonsson School of Engineering and Computer Science",
-        "description": "Employs multiscale simulation techniques to study the behavior of materials and systems at different length and time scales. The lab investigates applications in areas such as materials design, nanotechnology, and biomechanics."
-    },
-    {
-        "name": "Nanomechanical Multiphysics Lab",
-        "professor": "Dr. Rodrigo Bernal",
-        "url": "https://www.utdallas.edu/nml/",
-        "school": "Erik Jonsson School of Engineering and Computer Science",
-        "description": "Focuses on the study of nanomechanical phenomena and their coupling with other physical phenomena, such as electricity, magnetism, and heat. The lab investigates applications in areas such as sensing, energy harvesting, and nanoelectronics."
-    },
-    {
-        "name": "Nanophotonics Lab",
-        "professor": "Dr. Qing Gu",
-        "url": "https://www.utdallas.edu/nanophoton/",
-        "school": "Erik Jonsson School of Engineering and Computer Science",
-        "description": "Dedicated to the study of light-matter interactions at the nanoscale. The lab investigates applications in areas such as sensing, imaging, and energy harvesting."
-    },
-    {
-        "name": "Neural Interfaces Lab",
-        "professor": "Dr. Stuart Cogan",
-        "url": "https://labs.utdallas.edu/cogan/",
-        "school": "Erik Jonsson School of Engineering and Computer Science",
-        "description": "Focuses on developing neural interfaces for restoring lost function and treating neurological disorders. The lab investigates topics such as electrode design, biocompatibility, and neural signal processing."
-    },
-    {
-        "name": "Neuromuscular and Musculoskeletal Biomechanics Lab",
-        "professor": "Dr. Gu Eon Kang",
-        "url": "https://labs.utdallas.edu/nmbl/",
-        "school": "Erik Jonsson School of Engineering and Computer Science",
-        "description": "Studies the biomechanics of human movement, with a focus on understanding the interaction between the nervous system, muscles, and skeleton. The lab investigates applications in areas such as rehabilitation, sports performance, and injury prevention."
-    },
-    {
-        "name": "Neuronal Networks and Interfaces Laboratory",
-        "professor": "Dr. Joseph Pancrazio",
-        "url": "https://labs.utdallas.edu/nnil/",
-        "school": "Erik Jonsson School of Engineering and Computer Science",
-        "description": "Focuses on developing microscale devices to interface with neuronal networks. The lab engineers novel tools and techniques to study and manipulate neural activity for basic neuroscience research and neuroengineering applications."
-    },
-    {
-        "name": "Nosratinia Lab",
-        "professor": "Dr. Aria Nosratinia",
-        "url": "https://labs.utdallas.edu/aria",
-        "school": "Erik Jonsson School of Engineering and Computer Science",
-        "description": "Focuses on information theory, wireless communication, and networking. This lab explores fundamental limits and practical designs for communication systems, with an emphasis on robustness, security, and efficiency."
-    },
-    {
-        "name": "Obaid Lab for Molecular Imaging and Optical",
-        "professor": "Dr. Girgis Obaid",
-        "url": "https://labs.utdallas.edu/obaid-mion/",
-        "school": "Erik Jonsson School of Engineering and Computer Science",
-        "description": "Focuses on developing novel molecular imaging techniques for early disease detection and therapy monitoring. The lab combines expertise in chemistry, optics, and nanotechnology to create innovative imaging agents and devices."
-    },
-    {
-        "name": "Optical Communication Lab",
-        "professor": "Dr. Kamran Kiasaleh",
-        "url": "https://www.utdallas.edu/ocl/",
-        "school": "Erik Jonsson School of Engineering and Computer Science",
-        "description": "Focuses on advanced optical communication systems and networks. The lab researches new technologies for high-speed data transmission, including fiber optic communication, free-space optics, and underwater optical communication."
-    },
-    {
-        "name": "Physical Genomics Lab",
-        "professor": "Dr. Stephen Levene",
-        "url": "https://labs.utdallas.edu/levenelab/",
-        "school": "Erik Jonsson School of Engineering and Computer Science",
-        "description": "Focuses on understanding the physical organization of genomes and its impact on gene expression and regulation. The lab develops and applies novel experimental and computational techniques to study the 3D structure of DNA and its role in cellular processes."
-    },
-    {
-        "name": "Reliability and Design Automation Laboratory",
-        "professor": "Dr. Yanwen Xu",
-        "url": "https://labs.utdallas.edu/rdal/",
-        "school": "Erik Jonsson School of Engineering and Computer Science",
-        "description": "Focuses on ensuring the reliability and performance of electronic systems. The lab develops design automation tools and techniques to address challenges such as aging, variability, and security in modern integrated circuits."
-    },
-    {
-        "name": "Targeted Neuroplasicity Lab",
-        "professor": "Dr. Seth Hays",
-        "url": "https://www.utdallas.edu/tnpl/",
-        "school": "Erik Jonsson School of Engineering and Computer Science",
-        "description": "Focuses on understanding and manipulating neuroplasticity for therapeutic purposes. The lab investigates how targeted interventions, such as brain stimulation and pharmacological agents, can promote neural repair and functional recovery after injury or disease."
-    },
-    {
-        "name": "Ultrasound Imaging and Therapy Lab",
-        "professor": "Dr. Kenneth Hoyt",
-        "url": "https://www.utdallas.edu/usit/",
-        "school": "Erik Jonsson School of Engineering and Computer Science",
-        "description": "Focuses on developing advanced ultrasound techniques for medical imaging and therapy. The lab explores novel methods for enhancing image quality, delivering drugs, and ablating tumors using focused ultrasound."
-    },
-    {
-        "name": "Couples Daily Lives Lab",
-        "professor": "Dr. Karen Prager",
-        "url": "https://labs.utdallas.edu/couples-daily-lives/",
-        "school": "School of Interdisciplinary Studies",
-        "description": "Examines the dynamics of romantic relationships in everyday life. The lab studies how couples interact, communicate, and cope with stress, with a focus on understanding the factors that contribute to relationship satisfaction and stability."
-    },
-    {
-        "name": "Ahn Lab",
-        "professor": "Dr. Jung-Mo Ahn",
-        "url": "https://labs.utdallas.edu/ahn/",
-        "school": "School of Natural Sciences and Mathematics",
-        "description": "Focuses on the development of novel chemical tools and strategies for studying and manipulating biological systems. The lab's research spans chemical biology, organic chemistry, and medicinal chemistry."
-    },
-    {
-        "name": "Antimicrobial Peptide Signaling Lab",
-        "professor": "Dr. Xintong Dong",
-        "url": "https://labs.utdallas.edu/ampreceptors/",
-        "school": "School of Natural Sciences and Mathematics",
-        "description": "Studies the role of antimicrobial peptides in regulating immune responses and host-microbe interactions. The lab investigates how these peptides activate signaling pathways and modulate cellular functions to combat infection."
-    },
-    {
-        "name": "De Nisco Lab",
-        "professor": "Dr. Nicole De Nisco",
-        "url": "https://labs.utdallas.edu/deniscolab/",
-        "school": "School of Natural Sciences and Mathematics",
-        "description": "Focuses on understanding the mechanisms of bacterial pathogenesis and antibiotic resistance. The lab investigates how bacteria evade the immune system and develop resistance to antibiotics, with the goal of identifying new therapeutic targets."
-    },
-    {
-        "name": "Dillon Lab",
-        "professor": "Dr. Nicholas Dillon",
-        "url": "https://labs.utdallas.edu/dillonlab/",
-        "school": "School of Natural Sciences and Mathematics",
-        "description": "Focuses on understanding the molecular mechanisms that regulate genome organization and function. The lab uses biochemical, genetic, and genomic approaches to study how DNA is packaged and accessed in cells."
-    },
-    {
-        "name": "Dingal Lab",
-        "professor": "Dr. Dave Dingal",
-        "url": "https://labs.utdallas.edu/davedingal/",
-        "school": "School of Natural Sciences and Mathematics",
-        "description": "Focuses on synthetic organic chemistry, methodology development, and total synthesis of natural products. Research efforts are directed toward the design and implementation of innovative chemical transformations."
-    },
-    {
-        "name": "Dodani Lab",
-        "professor": "Dr. Sheel Dodani",
-        "url": "https://labs.utdallas.edu/dodani",
-        "school": "School of Natural Sciences and Mathematics",
-        "description": "Focuses on developing and applying chemical tools to study biological processes. Research areas include drug delivery, molecular imaging, and protein engineering."
-    },
-    {
-        "name": "Exoplanet Group",
-        "professor": "Dr. Kaloyan Penev",
-        "url": "https://labs.utdallas.edu/kpenev/",
-        "school": "School of Natural Sciences and Mathematics",
-        "description": "Dedicated to the study of exoplanets, planets orbiting stars other than our Sun. The group uses observational data and theoretical models to characterize exoplanet properties, such as size, mass, and atmospheric composition."
-    },
-    {
-        "name": "Fasan Lab",
-        "professor": "Dr. Rudi Fasan",
-        "url": "https://labs.utdallas.edu/fasan/",
-        "school": "School of Natural Sciences and Mathematics",
-        "description": "Focuses on the design and engineering of peptides and proteins with novel functions. Research areas include biocatalysis, drug discovery, and biomaterials."
-    },
-    {
-        "name": "Gassensmith Lab",
-        "professor": "Dr. Jeremiah Gassensmith",
-        "url": "https://labs.utdallas.edu/gassensmith",
-        "school": "School of Natural Sciences and Mathematics",
-        "description": "Focuses on the design, synthesis, and application of mechanically-interlocked molecules and polymers. Research efforts are directed toward creating new materials with unique properties and functions."
-    },
-    {
-        "name": "Gevorgyan Group",
-        "professor": "Dr. Vladmir Gevorgyan",
-        "url": "https://labs.utdallas.edu/gevorgyan-group/",
-        "school": "School of Natural Sciences and Mathematics",
-        "description": "Focuses on the development of new catalytic reactions and their application to the synthesis of complex organic molecules. Research areas include organometallic chemistry, asymmetric catalysis, and total synthesis."
-    },
-    {
-        "name": "Hajeri Lab",
-        "professor": "Dr. Vinita Hajeri",
-        "url": "https://labs.utdallas.edu/hajeri/",
-        "school": "School of Natural Sciences and Mathematics",
-        "description": "Focuses on investigating the molecular mechanisms underlying plant development and stress responses. The lab uses genetic, genomic, and biochemical approaches to study plant hormone signaling, gene regulation, and environmental adaptation."
-    },
-    {
-        "name": "",
-        "professor": "Dr. Yujie Zheng",
-        "url": "https://labs.utdallas.edu/imaging-radar-lab/",
-        "school": "School of Natural Sciences and Mathematics",
-        "description": "Develops advanced radar and imaging techniques for environmental monitoring, remote sensing, and security applications. The lab focuses on theoretical and experimental research in electromagnetics, signal processing, and image reconstruction."
-    },
-    {
-        "name": "Joshi Lab",
-        "professor": "Dr. Purna Joshi",
-        "url": "https://labs.utdallas.edu/joshi/",
-        "school": "School of Natural Sciences and Mathematics",
-        "description": "Focuses on understanding the molecular mechanisms that regulate plant immunity and disease resistance. The lab uses genetic, genomic, and biochemical approaches to study plant-pathogen interactions and identify new strategies for crop protection."
-    },
-    {
-        "name": "Meteorite Education and Research Lab",
-        "professor": "Dr. Robert Stern",
-        "url": "https://labs.utdallas.edu/merl/",
-        "school": "School of Natural Sciences and Mathematics",
-        "description": "Dedicated to the study of meteorites and other extraterrestrial materials. The lab provides educational resources and research opportunities for students and the public, promoting understanding of planetary science and the origins of the solar system."
-    },
-    {
-        "name": "Permian Basin Research Lab",
-        "professor": "Dr. Robert Stern",
-        "url": "https://labs.utdallas.edu/permianbasinresearch/",
-        "school": "School of Natural Sciences and Mathematics",
-        "description": "Conducts research on the geology and geophysics of the Permian Basin, a major oil and gas producing region. The lab studies the formation, evolution, and resource potential of the basin, with a focus on improving energy exploration and production techniques."
-    },
-    {
-        "name": "Sherry Lab",
-        "professor": "Dr. Dean Sherry",
-        "url": "https://labs.utdallas.edu/sherry",
-        "school": "School of Natural Sciences and Mathematics",
-        "description": "Focuses on the development of contrast agents for magnetic resonance imaging (MRI). The lab designs and synthesizes new molecules that enhance the sensitivity and specificity of MRI, enabling improved diagnosis and monitoring of disease."
-    },
-    {
-        "name": "Smaldone Lab",
-        "professor": "Dr. Ron Smaldone",
-        "url": "https://labs.utdallas.edu/smaldone/",
-        "school": "School of Natural Sciences and Mathematics",
-        "description": "Focuses on developing new methods for polymer synthesis and materials design. Research efforts are directed toward creating sustainable polymers with tailored properties for various applications."
-    },
-    {
-        "name": "Torabifard Lab",
-        "professor": "Dr. Hedieh Torabifard",
-        "url": "https://labs.utdallas.edu/torabifard/",
-        "school": "School of Natural Sciences and Mathematics",
-        "description": "Focuses on experimental fluid mechanics and heat transfer, with applications in energy systems and environmental science. The lab uses advanced measurement techniques to study turbulent flows, convective heat transfer, and multiphase flows."
-    },
-    {
-        "name": "Zheng Lab",
-        "professor": "Dr. Jie Zheng",
-        "url": "https://labs.utdallas.edu/zheng/",
-        "school": "School of Natural Sciences and Mathematics",
-        "description": "Focuses on nanomaterials and nanomedicine, with an emphasis on developing new diagnostic and therapeutic tools for cancer. The lab designs and synthesizes nanoparticles with tailored properties for targeted drug delivery, imaging, and therapy."
-    },
-    {
-        "name": "IQ Design",
-        "professor": "Unknown",
-        "url": "https://labs.utdallas.edu/iqdesign/",
-        "school": "University-Wide Labs and Groups",
-        "description": "Provides resources and support for students interested in innovation and design. The group offers workshops, mentorship, and prototyping facilities to help students develop and launch their own ventures."
-    }
+  {
+    "name": "Advanced Nano-Energy Lab",
+    "professor": "Dr. Jianguo Xiong, Associate Professor",
+    "school": "University of Texas at Dallas",
+    "description": "The lab focuses on designing and manufacturing advanced materials/structures for energy and thermal applications. Their work includes efficient heat dissipation systems contributing to renewable energy solutions and electronics cooling technologies.",
+    "url": "https://labs.utdallas.edu/xiong/",
+    "professor_email": "Not specified in the available information"
+  },
+  {
+    "name": "Electric Powertrains Laboratory",
+    "professor": "Dr. Matthew C. Gardner, Associate Professor",
+    "school": "University of Texas at Dallas",
+    "description": "The lab develops innovative solutions for electrical powertrain systems, focusing on electric vehicles and sustainable energy integration. Key areas include power electronics, electric drives, and advanced control systems.",
+    "url": "https://labs.utdallas.edu/epl/",
+    "professor_email": "Not specified in the available information"
+  },
+  {
+    "name": "OpNeAR Open Networking Advanced Research Lab",
+    "professor": "Dr. Andrea Fumagalli, Professor",
+    "school": "University of Texas at Dallas",
+    "description": "The lab explores advanced networking technologies, emphasizing optical and wireless networking. Recent projects involve enhancing network resilience and efficiency through novel architectures and algorithms.",
+    "url": "https://opnear.utdallas.edu/",
+    "professor_email": "Not specified in the available information"
+  },
+  {
+    "name": "Biomedical Microdevices and Nanotechnology Laboratory",
+    "professor": "Dr. Shalini Prasad, Professor",
+    "school": "University of Texas at Dallas",
+    "description": "The lab's research involves developing microscale and nanoscale technologies for biomedical applications. Notable contributions include biosensors for healthcare diagnostics and wearable devices for monitoring physiological signals.",
+    "url": "https://ecs.utdallas.edu/research/researchlabs/BMNL/personnel.html",
+    "professor_email": "Not specified in the available information"
+  },
+  {
+    "name": "Face Perception Research Lab",
+    "professor": "Dr. Alice O’Toole, Professor",
+    "school": "University of Texas at Dallas",
+    "description": "This lab studies the complexities of human face perception and recognition, investigating neural underpinnings and psychological processes. Techniques include computational modeling and neuroimaging to understand face perception mechanisms.",
+    "url": "https://labs.utdallas.edu/facelab/",
+    "professor_email": "Not specified in the available information"
+  },
+  {
+    "name": "Device Research Lab",
+    "professor": "Professor Evelyn N. Wang",
+    "school": "Massachusetts Institute of Technology",
+    "description": "Focuses on addressing energy and water challenges through mass transport research, materials engineering, and device development. Works on desalination and electrochemical processes.",
+    "url": "https://drl.mit.edu/",
+    "professor_email": "Not available"
+  },
+  {
+    "name": "Tisdale Lab",
+    "professor": "Professor William Tisdale",
+    "school": "Massachusetts Institute of Technology",
+    "description": "Energy transfer in nanostructured materials, focusing on energy conversion and materials synthesis for applications like quantum dots and perovskites.",
+    "url": "https://tisdalelab.mit.edu/",
+    "professor_email": "Not available"
+  },
+  {
+    "name": "Computer Science and Artificial Intelligence Laboratory (CSAIL)",
+    "professor": "Professor Daniela Rus",
+    "school": "Massachusetts Institute of Technology",
+    "description": "CSAIL is MIT's largest research laboratory focusing on computer science and artificial intelligence research. Led by Professor Daniela Rus, the lab conducts research in robotics, machine learning, computer vision, natural language processing, and distributed systems.",
+    "url": "https://www.csail.mit.edu/",
+    "professor_email": "rus@csail.mit.edu"
+  },
+  {
+    "name": "Koch Institute for Integrative Cancer Research",
+    "professor": "Multiple Faculty Directors",
+    "school": "Massachusetts Institute of Technology",
+    "description": "A National Cancer Institute-designated basic cancer research center that brings together life scientists and engineers to develop new technologies for cancer detection, monitoring, and treatment. Research focuses on cancer biology, nanotechnology, and personalized medicine.",
+    "url": "https://ki.mit.edu/",
+    "professor_email": "Contact through website"
+  },
+  {
+    "name": "Research Laboratory of Electronics (RLE)",
+    "professor": "Multiple Principal Investigators",
+    "school": "Massachusetts Institute of Technology",
+    "description": "Founded in 1946, RLE is one of MIT's oldest and most prestigious research laboratories. Research areas include quantum electronics, photonics, bioelectronics, nanostructures, and engineering quantum systems.",
+    "url": "https://www.rle.mit.edu/",
+    "professor_email": "Contact through website"
+  },
+  {
+    "name": "Laboratory for Information and Decision Systems (LIDS)",
+    "professor": "Professor Sertac Karaman",
+    "school": "Massachusetts Institute of Technology",
+    "description": "MIT's longest continuously-running lab, LIDS conducts research in systems and control, communications and networks, optimization, statistics and inference, and computational biology. Directed by Professor Sertac Karaman.",
+    "url": "https://lids.mit.edu/",
+    "professor_email": "Contact through website"
+  },
+  {
+    "name": "Distributed Robotics Laboratory",
+    "professor": "Professor Daniela Rus",
+    "school": "Massachusetts Institute of Technology",
+    "description": "Part of CSAIL, this lab focuses on distributed robotics, autonomous systems, and robot swarms. Research includes self-assembling robots, soft robotics, and brain-controlled robotic systems.",
+    "url": "https://danielarus.csail.mit.edu/",
+    "professor_email": "rus@csail.mit.edu"
+  },
+  {
+    "name": "Pop Lab",
+    "professor": "Prof. Eric Pop",
+    "school": "Stanford University",
+    "description": "The Pop Lab is dedicated to innovations in nanoscale device engineering, exploring materials beyond silicon, and pursuing advancements in low-power electronics. Their research focuses on thermal properties of materials, nanoscale heat dissipation, and improving energy efficiency in electronic devices.",
+    "url": "https://poplab.stanford.edu/",
+    "professor_email": "Not provided on the website."
+  },
+  {
+    "name": "Juan M. Rivas Davila Group",
+    "professor": "Prof. Juan M. Rivas Davila",
+    "school": "Stanford University",
+    "description": "The Rivas Group is focused on power electronics and radio frequency (RF) systems, developing new technologies for applications such as wireless power transfer and implantable medical devices. They work on overcoming challenges in power conversion efficiency and miniaturization of power systems.",
+    "url": "https://superlab.stanford.edu/Juan.html",
+    "professor_email": "Not provided on the website."
+  },
+  {
+    "name": "Stanford Sustainable Systems Lab",
+    "professor": "Not clearly identified in the result.",
+    "school": "Stanford University",
+    "description": "Focuses on interdisciplinary research to address challenges in sustainability, involving renewable energy systems, climate change adaptation, and sustainable urban planning.",
+    "url": "https://s3l.stanford.edu/",
+    "professor_email": "Not provided on the website."
+  },
+  {
+    "name": "Arbabian Lab",
+    "professor": "Prof. Amin Arbabian",
+    "school": "Stanford University",
+    "description": "The Arbabian Lab advances technologies in both medical devices and wireless communication. Innovations include ultrasound systems for diagnostic imaging and wireless sensors for health monitoring.",
+    "url": "https://arbabianlab.stanford.edu/",
+    "professor_email": "Not provided on the website."
+  },
+  {
+    "name": "Farhat Research Group",
+    "professor": "Prof. Charbel Farhat",
+    "school": "Stanford University",
+    "description": "The group specializes in computational modeling and numerical simulations aimed at solving complex problems in aerodynamics and structural dynamics. They work on simulation-based engineering science for design and optimization of aerospace systems.",
+    "url": "https://aa.stanford.edu/research-impact/labs-and-centers/farhat-research-group",
+    "professor_email": "Not provided on the website."
+  },
+  {
+    "name": "Staskawicz Lab",
+    "professor": "Dr. Brian Staskawicz",
+    "school": "University of California Berkeley",
+    "description": "The Staskawicz Lab is focused on understanding the molecular basis of plant immunity with a strong emphasis on identifying and characterizing the pathways and interactions between plants and pathogenic microbes. Current projects include the deployment of genome editing tools like CRISPR to enhance resistance.",
+    "url": "https://www.staskawiczlab.berkeley.edu/",
+    "professor_email": "Not specified on website"
+  },
+  {
+    "name": "Denis Titov Laboratory",
+    "professor": "Dr. Denis Titov",
+    "school": "University of California Berkeley",
+    "description": "The lab works on quantitative understanding of human metabolism and deciphering the molecular basis of aging. They use advanced techniques to map and analyze cellular metabolic networks affecting human health.",
+    "url": "https://denistitovlab.org/",
+    "professor_email": "Not specified on website"
+  },
+  {
+    "name": "Williams Lab",
+    "professor": "Dr. Evan Williams",
+    "school": "University of California Berkeley",
+    "description": "The Williams Lab works on answering fundamental questions in biology using cutting-edge methodologies including mass spectrometry to study proteins and other biomolecules.",
+    "url": "https://www.williamsplantlab.com/",
+    "professor_email": "Not specified on website"
+  },
+  {
+    "name": "Murthy Lab",
+    "professor": "Dr. Niren Murthy",
+    "school": "University of California Berkeley",
+    "description": "Murthy Lab focuses on developing new materials for drug delivery and molecular imaging. Their projects include delivering CRISPR-Cas9 and development of novel antimicrobial peptides.",
+    "url": "https://murthylab.berkeley.edu/",
+    "professor_email": "Not specified on website"
+  },
+  {
+    "name": "Hariharan Lab",
+    "professor": "Dr. Itir Hariharan",
+    "school": "University of California Berkeley",
+    "description": "The primary focus is on the developmental processes in multicellular organisms. The lab investigates morphogenetic transformations using Drosophila as a model organism to understand growth regulation.",
+    "url": "https://mcb.berkeley.edu/labs/hariharan/",
+    "professor_email": "Not specified on website"
+  },
+  {
+    "name": "Bustamante Lab",
+    "professor": "Dr. Carlos Bustamante",
+    "school": "University of California Berkeley",
+    "description": "This lab develops and applies novel methods of single-molecule manipulation and detection to understand the physical basis of biological processes.",
+    "url": "https://bustamante.berkeley.edu/",
+    "professor_email": "Not specified on website"
+  },
+  {
+    "name": "Schepartz Laboratory",
+    "professor": "Dr. Alanna Schepartz",
+    "school": "University of California Berkeley",
+    "description": "The Schepartz Lab develops chemical tools to study cellular function, with a focus on the complex dynamics controlling protein folding, molecular recognition, and bio-catalysis.",
+    "url": "https://schepartzlab.com/principal-investigator",
+    "professor_email": "Not specified on website"
+  },
+  {
+    "name": "Yaghi Laboratory",
+    "professor": "Dr. Omar Yaghi",
+    "school": "University of California Berkeley",
+    "description": "Specialized in reticular chemistry and designing novel framework materials, such as metal-organic frameworks (MOFs) for sustainable energy and environmental applications.",
+    "url": "https://yaghi.berkeley.edu/",
+    "professor_email": "Not specified on website"
+  },
+  {
+    "name": "Keasling Lab",
+    "professor": "Dr. Jay D. Keasling",
+    "school": "University of California Berkeley",
+    "description": "This lab leverages synthetic biology to engineer microbes for the production of biofuels, medicines, and valuable chemicals from renewable resources.",
+    "url": "https://keaslinglab.lbl.gov/",
+    "professor_email": "Not specified on website"
+  },
+  {
+    "name": "Jen Research Lab",
+    "professor": "Coty Jen",
+    "school": "Carnegie Mellon University",
+    "description": "The lab conducts field measurements to determine which compounds are responsible for atmospheric nucleation and studies how sulfuric acid, a product from SO2 emissions, and amines react to form and grow particles.",
+    "url": "https://www.cmu.edu/cheme/research/jenlab/",
+    "professor_email": "Not specified on the page used for this info"
+  },
+  {
+    "name": "CAOs Laboratory",
+    "professor": "Bradford Z. Mahon",
+    "school": "Carnegie Mellon University",
+    "description": "Investigative research in AI, cognitive science, and neuroscience with real-world impact, focused on concepts, actions, and objects.",
+    "url": "https://www.cmu.edu/dietrich/psychology/caoslab/",
+    "professor_email": "Not specified on the page used for this info"
+  },
+  {
+    "name": "Anima AI + Science Lab",
+    "professor": "Anima Anandkumar, Professor of Applied and Computational Mathematics",
+    "school": "California Institute of Technology",
+    "description": "The lab engages in multidisciplinary work, developing foundational machine learning algorithms and scientific simulations. Key projects involve reinforcement learning and AI applications in scientific modeling and perception.",
+    "url": "https://tensorlab.cms.caltech.edu/users/anima/group.html",
+    "professor_email": "Not provided, please refer to the website for contact details."
+  },
+  {
+    "name": "Perona Lab",
+    "professor": "Pietro Perona, Allen E. Puckett Professor of Electrical Engineering and Computation and Neural Systems",
+    "school": "California Institute of Technology",
+    "description": "Focuses on computational vision, analyzing visual systems to understand behavior and recognizing patterns in vision. The lab also contributes to AI and conservation.",
+    "url": "https://www.vision.caltech.edu/openings/",
+    "professor_email": "Not provided, please refer to the website for contact details."
+  },
+  {
+    "name": "High Throughput Experimentation (HTE)",
+    "professor": "John M. Gregoire, Research Professor of Applied Physics and Materials Science",
+    "school": "California Institute of Technology",
+    "description": "Aims to accelerate materials discovery via automated, high-throughput experimental methods, integrating AI and computational materials science.",
+    "url": "https://gregoire.people.caltech.edu/",
+    "professor_email": "Not provided, please refer to the website for contact details."
+  },
+  {
+    "name": "Adolphs Lab",
+    "professor": "Ralph Adolphs, Bren Professor of Psychology, Neuroscience, and Biology",
+    "school": "California Institute of Technology",
+    "description": "Investigates neural mechanisms of social behavior and emotion, exploring facial emotion recognition and social judgments.",
+    "url": "https://emotion.caltech.edu/",
+    "professor_email": "Not provided, please refer to the website for contact details."
+  },
+  {
+    "name": "Stratos Idreos",
+    "professor": "Stratos Idreos, Gordon McKay Professor of Computer Science",
+    "school": "Harvard University",
+    "description": "Stratos Idreos's lab, DASlab, focuses on developing automated, workload- and hardware-aware data systems, enhancing the speed and accessibility of big data processing. Their applications span relational analytics, NoSQL, machine learning, and blockchain.",
+    "url": "https://stratos.seas.harvard.edu/",
+    "professor_email": "Not provided in search results"
+  },
+  {
+    "name": "Salil Vadhan",
+    "professor": "Salil Vadhan, Professor of Computer Science and Applied Mathematics",
+    "school": "Harvard University",
+    "description": "Vadhan's research includes computational complexity, cryptography, randomness in computation, and data privacy. He leads the Privacy Tools Project and co-leads the OpenDP project.",
+    "url": "https://people.seas.harvard.edu/~salil/index.html",
+    "professor_email": "Not provided in search results"
+  },
+  {
+    "name": "Elena L. Glassman - The Variation Lab",
+    "professor": "Elena L. Glassman, Assistant Professor",
+    "school": "Harvard University",
+    "description": "The lab focuses on augmenting human intelligence through the concept of variation, specializing in human-computer interaction.",
+    "url": "https://glassmanlab.seas.harvard.edu/",
+    "professor_email": "Not provided in search results"
+  },
+  {
+    "name": "Daniel L. Hartl",
+    "professor": "Daniel L. Hartl, Higgins Professor of Biology",
+    "school": "Harvard University",
+    "description": "Utilizes model organisms for studies in evolutionary biology, genomics, providing insights into organismal evolution and genetic diversity.",
+    "url": "https://www.oeb.harvard.edu/people/daniel-l-hartl",
+    "professor_email": "Not provided in search results"
+  },
+  {
+    "name": "Wade Harper - Harper Lab",
+    "professor": "Wade Harper, Chairman, Department of Cell Biology",
+    "school": "Harvard University",
+    "description": "The lab works across various fields like cancer biology, biochemistry, and molecular biology, focusing on cellular mechanisms and molecular pathology.",
+    "url": "https://harper.hms.harvard.edu/people",
+    "professor_email": "Not provided in search results"
+  },
+  {
+    "name": "Pierce Lab",
+    "professor": "Naomi Pierce, Professor of Biology",
+    "school": "Harvard University",
+    "description": "Focuses on evolutionary biology, particularly in insect behavior ecology, and mutualisms, studying biodiversity and evolutionary processes.",
+    "url": "https://piercelab.oeb.harvard.edu/people/naomi-pierce",
+    "professor_email": "Not provided in search results"
+  },
+  {
+    "name": "Cassandra Extavour",
+    "professor": "Cassandra Extavour, Professor",
+    "school": "Harvard University",
+    "description": "Focuses on evolution and development of reproductive systems, particularly germ line specification and gonad development.",
+    "url": "https://ssqbiophd.hms.harvard.edu/faculty-staff/cassandra-extavour",
+    "professor_email": "Not provided in search results"
+  },
+  {
+    "name": "The Knowles Group",
+    "professor": "David MacMillan (James S. McDonnell Distinguished University Professor of Chemistry)",
+    "school": "Princeton University",
+    "description": "The Knowles Group focuses on innovative approaches in synthetic organic chemistry and asymmetric catalysis. Their research emphasizes the development of light-driven methods to generate and manipulate radical intermediates, including processes for bond activation and radical formation from strong organic bonds. They also explore out-of-equilibrium transformations to enable challenging chemical reactions.",
+    "url": "https://knowleslab.princeton.edu/",
+    "professor_email": "Contact through the website"
+  },
+  {
+    "name": "The Lightwave Communications Research Lab",
+    "professor": "Paul Prucnal (Professor of Electrical and Computer Engineering)",
+    "school": "Princeton University",
+    "description": "The lab focuses on photonics and neural network research, advancing fields like brain-inspired computing. They are developing laser neurons with graphene, contributing to innovations in neuromorphic photonics and high-speed optical communications.",
+    "url": "https://prucnal.princeton.edu/",
+    "professor_email": "Contact through the website"
+  },
+  {
+    "name": "The Laboratory for the Physics of Life",
+    "professor": "Thomas Gregor (Associate Professor of Physics and the Lewis-Sigler Institute for Integrative Genomics)",
+    "school": "Princeton University",
+    "description": "This lab focuses on understanding the physical principles underlying multicellular life forms, employing advanced microscopy, microfluidics, and molecular biology alongside theoretical modeling. They study pattern formation, transcriptional regulation, and collective behaviors in biological systems using organisms like Drosophila and Dictyostelium.",
+    "url": "https://tglab.princeton.edu/",
+    "professor_email": "Contact through the website"
+  },
+  {
+    "name": "Seung Lab",
+    "professor": "H. Sebastian Seung (Professor of Computer Science and Neuroscience)",
+    "school": "Princeton University",
+    "description": "The Seung Lab specializes in connectomics and neural circuit analysis, employing convolutional neural networks for electron microscopy image analysis and studying brain function, development, and plasticity. Their work includes reconstructing neural circuits and participating in the NIH BRAIN Initiative.",
+    "url": "https://seunglab.org/",
+    "professor_email": "Contact through the website"
+  },
+  {
+    "name": "Gould Lab",
+    "professor": "Elizabeth Gould (Professor of Psychology and Neuroscience)",
+    "school": "Princeton University",
+    "description": "The Gould Lab focuses on brain plasticity and its influence on behavior throughout development and adulthood. They explore mechanisms such as neurogenesis, synaptogenesis, and their roles in behaviors like social memory, utilizing various approaches to understand how these processes drive behavioral changes.",
+    "url": "https://gouldlab.princeton.edu/",
+    "professor_email": "Contact through the website"
+  },
+  {
+    "name": "Murphy Lab",
+    "professor": "Coleen Murphy (Professor of Molecular Biology and the Lewis-Sigler Institute for Integrative Genomics)",
+    "school": "Princeton University",
+    "description": "The Murphy Lab focuses on the molecular mechanisms that govern aging and longevity. They explore genes and biological processes associated with healthspan, aiming to improve health and lifespan through insights into cellular aging mechanisms.",
+    "url": "https://murphylab.princeton.edu/",
+    "professor_email": "Contact through the website"
+  },
+  {
+    "name": "Witten Lab",
+    "professor": "Ilana Witten (Associate Professor of Psychology and Neuroscience)",
+    "school": "Princeton University",
+    "description": "The Witten Lab investigates neural mechanisms of learning and decision-making, focusing on how learning algorithms are implemented in brain circuitry and influence behavior. Their work contributes to understanding complex brain functions and related mental health conditions.",
+    "url": "https://wittenlab.org/",
+    "professor_email": "Contact through the website"
+  },
+  {
+    "name": "Chirik Group",
+    "professor": "Paul Chirik (Higgins Professor of Chemistry)",
+    "school": "Princeton University",
+    "description": "The Chirik Group specializes in sustainable chemistry through the development of catalysts based on Earth-abundant transition metals, aiming to replace rare metals in industrial processes. Their work includes pioneering new reaction pathways and enhancing catalyst efficiency.",
+    "url": "https://chirik.princeton.edu/",
+    "professor_email": "Contact through the website"
+  },
+  {
+    "name": "Kahn Lab",
+    "professor": "Antoine Kahn (Stephen C. Macaleer ’63 Professor in Engineering and Applied Science)",
+    "school": "Princeton University",
+    "description": "The Kahn Lab focuses on the electronic, chemical, and structural properties of materials for thin-film electronic devices, including organic semiconductors and metal halide perovskites. Their research enhances device performance for applications in electronics.",
+    "url": "https://kahnlab.princeton.edu/",
+    "professor_email": "Contact through the website"
+  },
+  {
+    "name": "Princeton ImageX Labs (PIXL)",
+    "professor": "Adam Finkelstein (Professor of Computer Science)",
+    "school": "Princeton University",
+    "description": "PIXL advances imaging, computer vision, and multimedia technologies through interdisciplinary collaboration, focusing on visual recognition and image processing for real-world applications.",
+    "url": "https://pixl.cs.princeton.edu/",
+    "professor_email": "Contact through the website"
+  },
+  {
+    "name": "Neuromechanics & Mobility Lab",
+    "professor": "Katherine M. Steele, Director",
+    "school": "University of Washington",
+    "description": "The lab focuses on neuromechanics and mobility, incorporating a diverse team of research scientists and students. Research aims at enhancing mobility for individuals through integrated solutions involving biomechanics, engineering, and neuroscience.",
+    "url": "https://steelelab.me.uw.edu/our-team/",
+    "professor_email": "Not provided"
+  },
+  {
+    "name": "Stevens Lab",
+    "professor": "Dr. Kelly R. Stevens, Associate Professor",
+    "school": "University of Washington",
+    "description": "Specializes in regenerative medicine and tissue engineering using stem cells, 3D bioprinting, and synthetic biology. The lab focuses on creating human tissue models for understanding disease and developing regenerative therapies for the heart and liver.",
+    "url": "https://dlmp.uw.edu/faculty/stevens",
+    "professor_email": "Viewable on the [faculty page](https://dlmp.uw.edu/faculty/stevens)"
+  },
+  {
+    "name": "AMP Lab",
+    "professor": "Dr. Kat M. Steele",
+    "school": "University of Washington",
+    "description": "The AMP Lab aims to improve life quality for neurological disorder sufferers through engineering and device design. It combines biomechanics and motor-control insights for accessible technology and universal design solutions.",
+    "url": "https://www.me.washington.edu/facultyfinder/kat-m-steele",
+    "professor_email": "Not provided"
+  },
+  {
+    "name": "Garcia Lab",
+    "professor": "Andrés García, Executive Director",
+    "school": "Georgia Institute of Technology",
+    "description": "The Garcia Lab conducts research in bioengineering, focusing on cellular and molecular cues that regulate stem cell behavior for regeneration and repair.",
+    "url": "https://garcialab.gatech.edu/",
+    "professor_email": "Not listed"
+  },
+  {
+    "name": "Sustainable Thermal Systems Laboratory (STSL)",
+    "professor": "Dr. Srinivas Garimella, Professor",
+    "school": "Georgia Institute of Technology",
+    "description": "The research at STSL involves developing and applying advanced thermal systems to enhance energy efficiency and sustainability in various sectors, with significant projects in HVAC systems.",
+    "url": "https://stsl.gatech.edu/",
+    "professor_email": "Not listed"
+  },
+  {
+    "name": "Lively Lab",
+    "professor": "Dr. Ryan Lively, Associate Professor",
+    "school": "Georgia Institute of Technology",
+    "description": "Focuses on polymeric and inorganic membrane materials for applications in chemical separations, with projects targeting improvements in gas separation and filtration technologies.",
+    "url": "https://lively.chbe.gatech.edu/",
+    "professor_email": "Not listed"
+  },
+  {
+    "name": "Nanoscale Thermal Radiation Laboratory",
+    "professor": "Dr. Zhuomin Zhang",
+    "school": "Georgia Institute of Technology",
+    "description": "The lab focuses on nanoscale heat transfer, with research on thermal radiation, energy conversion, and microthermal systems crucial for nanoelectronics.",
+    "url": "https://zhang-nano.me.gatech.edu/",
+    "professor_email": "Not listed"
+  },
+  {
+    "name": "Brown Lab",
+    "professor": "Dr. Sam Brown, Professor",
+    "school": "Georgia Institute of Technology",
+    "description": "The Brown Lab explores microbial ecology, studying the evolutionary dynamics of cooperative behaviors in microbes, with applications in treating diseases.",
+    "url": "https://brownlab.biology.gatech.edu/",
+    "professor_email": "Not listed"
+  },
+  {
+    "name": "Safe Robotics Lab",
+    "professor": "Dr. Seo Hyun Kim",
+    "school": "Georgia Institute of Technology",
+    "description": "The lab develops safe, autonomous robotic systems for real-world applications with a focus on robust robotic perception and decision-making.",
+    "url": "https://saferoboticslab.me.gatech.edu/",
+    "professor_email": "Not listed"
+  },
+  {
+    "name": "Intelligent Decision and Autonomous Robots Lab",
+    "professor": "Dr. Frank Dellaert, Professor",
+    "school": "Georgia Institute of Technology",
+    "description": "This lab advances robotics research with an emphasis on intelligent decision processes for autonomous system interaction and navigation.",
+    "url": "https://lab-idar.gatech.edu/",
+    "professor_email": "Not listed"
+  },
+  {
+    "name": "Cryogenic Engineering Laboratory",
+    "professor": "Dr. Steven Chynoweth",
+    "school": "Georgia Institute of Technology",
+    "description": "Focused on advancing cryogenic processes, the lab conducts research on low-temperature and vacuum applications for future space exploration initiatives.",
+    "url": "https://gtcryolab.gatech.edu/",
+    "professor_email": "Not listed"
+  },
+  {
+    "name": "Power Systems Control and Automation Laboratory",
+    "professor": "Dr. Marcio de Queiroz",
+    "school": "Georgia Institute of Technology",
+    "description": "Specializes in the reliable and efficient operation of power grids, utilizing modern control and automation technologies to optimize performance.",
+    "url": "https://pscal.ece.gatech.edu/",
+    "professor_email": "Not listed"
+  },
+  {
+    "name": "Computational Perception Laboratory",
+    "professor": "Dr. Irfan Essa",
+    "school": "Georgia Institute of Technology",
+    "description": "Known for pioneering multimedia content analysis, the lab leverages AI and computer vision to interpret and synthesize visual information across different media.",
+    "url": "https://cpl.gatech.edu/",
+    "professor_email": "Not listed"
+  }
 ]
-
-

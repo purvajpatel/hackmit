@@ -1,5 +1,5 @@
 /* =========================================================
-   ResearchConnect — Carbon-inspired UI (dark, glass, neon)
+   Researchly — Carbon-inspired UI (dark, glass, neon)
    ========================================================= */
 
 /* Font */
@@ -104,9 +104,15 @@ body::before {
   max-width: 1200px; margin: 0 auto; padding: 14px 24px;
   display: flex; align-items: center; justify-content: space-between;
 }
+
 .nav-brand { display: flex; align-items: center; gap: 10px; font-weight: 700; }
 .nav-brand i { color: var(--accent); }
-.nav-menu { display: flex; gap: 28px; }
+.nav-menu { 
+  display: flex; 
+  gap: 28px; 
+  margin-left: auto;
+  margin-right: 20px;
+}
 .nav-link {
   color: var(--muted); text-decoration: none; font-weight: 600; font-size: 14px; position: relative;
 }
@@ -299,6 +305,72 @@ body::before {
   flex-wrap: wrap;
 }
 
+/* University Search */
+.university-search {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+}
+
+.search-input-group {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.university-search-input {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-size: 1rem;
+    background: var(--bg);
+    color: var(--text);
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.university-search-input:focus {
+    outline: none !important;
+    box-shadow: none !important;
+    border-color: var(--accent);
+}
+
+.university-search-input::placeholder {
+    color: var(--muted);
+}
+
+.search-results-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--surface-2);
+    padding: 1rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+}
+
+.search-results-header h4 {
+    margin: 0;
+    font-size: 1.1rem;
+    color: var(--accent);
+}
+
+.btn-sm {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+}
+
+/* Filters */
+.filters {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
 .timer-display {
   font-family: 'Inter', monospace;
   font-size: 24px;
@@ -469,6 +541,44 @@ body::before {
               rgba(0,0,0,0.6);
 }
 .modal-content { position: relative; width: min(720px, 96vw); padding: 18px; z-index: 1; }
+
+/* Interview Modal Scrollable */
+.interview-modal-content {
+  max-height: 90vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.interview-modal-content .modal-body {
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 8px;
+}
+
+/* Custom scrollbar for interview modal */
+.interview-modal-content::-webkit-scrollbar,
+.interview-modal-content .modal-body::-webkit-scrollbar {
+  width: 8px;
+}
+
+.interview-modal-content::-webkit-scrollbar-track,
+.interview-modal-content .modal-body::-webkit-scrollbar-track {
+  background: var(--surface);
+  border-radius: 4px;
+}
+
+.interview-modal-content::-webkit-scrollbar-thumb,
+.interview-modal-content .modal-body::-webkit-scrollbar-thumb {
+  background: var(--muted);
+  border-radius: 4px;
+  opacity: 0.7;
+}
+
+.interview-modal-content::-webkit-scrollbar-thumb:hover,
+.interview-modal-content .modal-body::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
 
 /* Make RAG modal wider - about 80% of screen width */
 #rag-modal .modal-content {

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ResearchConnect - Find Your Perfect Lab</title>
+    <title>Researchly - Find Your Perfect Lab</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
@@ -14,14 +14,13 @@
         <div class="nav-container">
             <div class="nav-brand">
                 <i class="fas fa-microscope"></i>
-                <span>ResearchConnect</span>
+                <span>Researchly</span>
             </div>
             <div class="nav-menu">
                 <a href="#home" class="nav-link active">Home</a>
                 <a href="#explore" class="nav-link">Explore Labs</a>
                 <a href="#recommendations" class="nav-link">Get Matched</a>
                 <a href="#rag-analysis" class="nav-link">AI Analysis</a>
-                <a href="#about" class="nav-link">About</a>
             </div>
             <div class="nav-controls">
                 <div class="nav-toggle">
@@ -66,6 +65,24 @@
             <div class="section-header">
                 <h2>Explore Research Labs</h2>
                 <p>Browse through our comprehensive database of research laboratories</p>
+            </div>
+            
+            <!-- University Search -->
+            <div class="university-search">
+                <div class="search-input-group">
+                    <input type="text" id="university-search-input" placeholder="Search labs at any university (e.g., Harvard, MIT, Stanford...)" class="university-search-input">
+                    <button id="search-university-btn" class="btn btn-primary">
+                        <i class="fas fa-search"></i>
+                        Search Labs
+                    </button>
+                </div>
+                <div class="search-results-header" id="search-results-header" style="display: none;">
+                    <h4 id="search-results-title"></h4>
+                    <button class="btn btn-outline btn-sm" id="reset-to-default">
+                        <i class="fas fa-arrow-left"></i>
+                        Back to All Labs
+                    </button>
+                </div>
             </div>
             
             <!-- Filters -->
@@ -372,7 +389,7 @@
 
     <!-- Practice Interview Modal -->
     <div class="modal" id="interview-modal">
-        <div class="modal-content interview-modal-content">
+        <div class="modal-content interview-modal-content scrollable-modal">
             <div class="modal-header">
                 <h3><i class="fas fa-microphone"></i> Practice Interview Questions (1 min each)</h3>
             </div>
@@ -449,9 +466,9 @@
             <div class="footer-content">
                 <div class="footer-brand">
                     <i class="fas fa-microscope"></i>
-                    <span>ResearchConnect</span>
+                    <span>Researchly</span>
                 </div>
-                <p>&copy; 2024 ResearchConnect. Connecting students with research opportunities.</p>
+                <p>&copy; 2024 Researchly. Connecting students with research opportunities.</p>
             </div>
         </div>
     </footer>

@@ -7,6 +7,8 @@ from pypdf import PdfReader
 from datetime import datetime
 import tempfile
 import io
+from lab_data_service import LabDataService
+import asyncio
 
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 DATA_DIR = os.path.join(BASE_DIR, 'data')
@@ -455,6 +457,38 @@ def rag_recommendations():
             try: os.remove(transcript_path)
             except OSError: pass
 
+@app.route('/api/search-university-labs', methods=['POST'])
+def search_university_labs():
+    """Search for labs at a specific university using MCP agents"""
+    try:
+        data = request.get_json()
+        university_name = data.get('university_name', '').strip()
+        
+        if not university_name:
+            return jsonify({'error': 'University name is required'}), 400
+        
+        # Initialize the lab data service
+        lab_service = LabDataService()
+        
+        # Run the async search
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+        
+        try:
+            labs = loop.run_until_complete(lab_service.search_university_labs(university_name, limit=20))
+        finally:
+            loop.close()
+        
+        return jsonify({
+            'success': True,
+            'university': university_name,
+            'labs': labs,
+            'count': len(labs)
+        })
+        
+    except Exception as e:
+        return jsonify({'error': f'Failed to search university labs: {str(e)}'}), 500
+
 @app.route('/api/draft-email', methods=['POST'])
 def draft_email():
     """Generate a cold email for a specific professor/lab"""
@@ -577,8 +611,8 @@ def analyze_interview():
             
             return jsonify({
                 'success': True,
-                'transcript': transcript,
-                'feedback': feedback
+                'feedback': feedback,
+                'transcript': transcript
             })
             
         finally:
@@ -606,19 +640,22 @@ def transcribe_audio(audio_path):
 def transcribe_with_gemini(audio_path):
     """Transcribe audio using Gemini"""
     try:
-        import google.generativeai as genai
+        from google import genai
+        
+        # Create Gemini client
+        client = genai.Client()
         
         # Upload audio file to Gemini
-        audio_file = genai.upload_file(audio_path)
-        
-        # Configure Gemini model
-        model = genai.GenerativeModel('gemini-1.5-flash')
+        audio_file = client.files.upload(file=audio_path)
         
         # Generate transcription
-        response = model.generate_content([
-            "Please transcribe this audio file accurately. Only return the transcription text, no additional commentary.",
-            audio_file
-        ])
+        response = client.models.generate_content(
+            model='gemini-1.5-flash',
+            contents=[
+                "Generate a transcript of the speech. Only return the transcription text, no additional commentary.",
+                audio_file
+            ]
+        )
         
         return response.text.strip()
         
@@ -727,6 +764,10 @@ The student was asked this question:
 **Student's Answer Transcript:**
 {transcript}
 
+WRITE THE FIRST SENTENCE OF THEIR TRANSCRIPT
+
+YOU MUST USE YOU AND ANALYZE THEIR TRANSCRIPT
+
 Analyze their answer in these categories:
 - **Content Quality**: Did they answer the question thoroughly and demonstrate relevant knowledge?
 - **Communication Skills**: How clear and articulate was their response?
@@ -734,7 +775,6 @@ Analyze their answer in these categories:
 - **Professionalism**: How professional and prepared did they sound?
 - **Overall Impression**: What's your assessment of their interview performance?
 
-Then give 2-3 specific, actionable tips to improve their answer.
 Use second person ("you") and be constructive but direct.
 Format your response with bold section headers and clear feedback."""
         
@@ -866,7 +906,7 @@ Solid interview response that demonstrates your qualifications and genuine inter
 *Note: This is demo feedback. Connect your AI provider for personalized analysis.*"""
 
 if __name__ == '__main__':
-    print("Starting ResearchConnect…")
+    print("Starting Researchly…")
     print(f"Gemini RAG features: {'Enabled' if GEMINI_AVAILABLE else 'Disabled'}")
     print(f"Interview Practice features: {'Enabled' if (GEMINI_AVAILABLE or OPENAI_AVAILABLE) else 'Mock Mode'}")
     app.run(debug=True, port=8080)

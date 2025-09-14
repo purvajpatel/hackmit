@@ -1,5 +1,5 @@
 /* ===============================
-   ResearchConnect — script.js
+   Researchly — script.js
    Complete, fixed, and hardened
    =============================== */
 
@@ -20,6 +20,13 @@ const schoolFilter           = $('#school-filter');
 const professorFilter        = $('#professor-filter');
 const labsGrid               = $('#labs-grid');
 const loadMoreBtn            = $('#load-more-btn');
+
+// University search elements
+const universitySearchInput  = $('#university-search-input');
+const searchUniversityBtn    = $('#search-university-btn');
+const searchResultsHeader    = $('#search-results-header');
+const searchResultsTitle     = $('#search-results-title');
+const resetToDefaultBtn      = $('#reset-to-default');
 
 const majorInput             = $('#major');
 const getRecommendationsBtn  = $('#get-recommendations-btn');
@@ -47,6 +54,113 @@ const ragFilePreview    = $('#file-preview');
 const ragFileNameEl     = $('#rag-form .file-name');
 const ragFileSizeEl     = $('#rag-form .file-size');
 
+// -------------------- University Search --------------------
+function setupUniversitySearch() {
+    if (!universitySearchInput || !searchUniversityBtn) return;
+    
+    // Search button click
+    searchUniversityBtn.addEventListener('click', handleUniversitySearch);
+    
+    // Enter key in search input
+    universitySearchInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            handleUniversitySearch();
+        }
+    });
+    
+    // Reset button click
+    if (resetToDefaultBtn) {
+        resetToDefaultBtn.addEventListener('click', resetToDefaultLabs);
+    }
+}
+
+async function handleUniversitySearch() {
+    const universityName = universitySearchInput.value.trim();
+    
+    if (!universityName) {
+        alert('Please enter a university name');
+        return;
+    }
+    
+    // Show loading state
+    showUniversitySearchLoading(true);
+    
+    try {
+        const response = await fetch('/api/search-university-labs', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                university_name: universityName
+            })
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            // Update labs with search results, sorting labs with professors first
+            allLabs = data.labs.sort((a, b) => {
+                const aHasProf = a.professor && a.professor.trim() && a.professor !== 'Not provided';
+                const bHasProf = b.professor && b.professor.trim() && b.professor !== 'Not provided';
+                
+                if (aHasProf && !bHasProf) return -1;
+                if (!aHasProf && bHasProf) return 1;
+                return a.name.localeCompare(b.name);
+            });
+            
+            filteredLabs = [...allLabs];
+            currentPage = 1;
+            
+            // Show search results header
+            showSearchResults(universityName, data.count);
+            
+            // Update filters and display
+            populateProfessorFilter(allLabs);
+            displayLabs();
+            
+            // Clear search input
+            universitySearchInput.value = '';
+        } else {
+            throw new Error(data.error || 'Failed to search university labs');
+        }
+    } catch (error) {
+        console.error('University search error:', error);
+        alert(`Error searching labs: ${error.message}`);
+    } finally {
+        showUniversitySearchLoading(false);
+    }
+}
+
+function showUniversitySearchLoading(isLoading) {
+    if (!searchUniversityBtn) return;
+    
+    if (isLoading) {
+        searchUniversityBtn.disabled = true;
+        searchUniversityBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Searching...';
+    } else {
+        searchUniversityBtn.disabled = false;
+        searchUniversityBtn.innerHTML = '<i class="fas fa-search"></i> Search Labs';
+    }
+}
+
+function showSearchResults(universityName, count) {
+    if (!searchResultsHeader || !searchResultsTitle) return;
+    
+    searchResultsTitle.textContent = `Found ${count} labs at ${universityName}`;
+    searchResultsHeader.style.display = 'flex';
+}
+
+function resetToDefaultLabs() {
+    // Hide search results header
+    if (searchResultsHeader) {
+        searchResultsHeader.style.display = 'none';
+    }
+    
+    // Reload original labs
+    loadLabs();
+}
+
 // -------------------- Boot --------------------
 document.addEventListener('DOMContentLoaded', () => {
   initializeApp();
@@ -57,6 +171,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // Fetch initial data
   loadLabs();
   loadSchools();
+  
+  // Setup university search
+  setupUniversitySearch();
 
   // Animations
   animateStats();
@@ -1292,7 +1409,7 @@ async function getFeedback() {
     const result = await response.json();
     
     if (response.ok && result.success) {
-      displayFeedback(result.feedback);
+      displayFeedback(result.feedback, result.transcript);
       // Show next question button if there are more questions
       if (currentQuestionIndex < currentQuestions.length - 1) {
         document.getElementById('next-question-btn').style.display = 'inline-block';
@@ -1311,14 +1428,39 @@ async function getFeedback() {
   }
 }
 
-function displayFeedback(feedback) {
+function displayFeedback(feedback, transcript) {
   const feedbackPanel = document.getElementById('interview-feedback');
   const feedbackContent = document.getElementById('feedback-content');
   
   if (feedbackPanel && feedbackContent) {
+    // Create content with transcript and feedback
+    let content = '';
+    
+    if (transcript) {
+      content += `
+        <div class="transcript-section">
+          <h4 style="color: var(--accent); margin-bottom: 10px;">
+            <i class="fas fa-microphone"></i> Your Answer Transcript:
+          </h4>
+          <div class="transcript-text" style="background: var(--card-bg); padding: 15px; border-radius: 8px; border-left: 4px solid var(--accent); margin-bottom: 20px; font-style: italic;">
+            ${escapeHtml(transcript)}
+          </div>
+        </div>
+      `;
+    }
+    
     // Convert feedback text to HTML with proper formatting
     const formattedFeedback = formatFeedbackText(feedback);
-    feedbackContent.innerHTML = formattedFeedback;
+    content += `
+      <div class="feedback-section">
+        <h4 style="color: var(--accent); margin-bottom: 15px;">
+          <i class="fas fa-comments"></i> AI Feedback:
+        </h4>
+        ${formattedFeedback}
+      </div>
+    `;
+    
+    feedbackContent.innerHTML = content;
     feedbackPanel.style.display = 'block';
     
     // Scroll to feedback
