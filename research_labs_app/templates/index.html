@@ -209,6 +209,14 @@
                         </div>
                     </div>
 
+                    <!-- Quick Recommendations Button -->
+                    <div class="form-actions" style="margin-top: 20px;">
+                        <button type="button" class="btn btn-secondary btn-large" id="get-recommendations-btn">
+                            <i class="fas fa-magic"></i>
+                            Get Basic Recommendations
+                        </button>
+                    </div>
+
                     <!-- Transcript Upload -->
                     <div class="form-section">
                         <h3><i class="fas fa-file-upload"></i> Transcript/Resume Upload (Recommended)</h3>
@@ -257,67 +265,16 @@
         </div>
     </section>
 
-    <!-- Recommendations Section -->
-    <section id="recommendations" class="recommendations">
+    <!-- Basic Recommendations Results Section -->
+    <section id="recommendations" class="recommendations" style="display: none;">
         <div class="container">
             <div class="section-header">
-                <h2>Get Personalized Recommendations</h2>
-                <p>Tell us about your interests and we'll find the perfect labs for you</p>
-            </div>
-
-            <div class="recommendation-form">
-                <div class="form-group">
-                    <label for="major">Your Major</label>
-                    <input type="text" id="major" placeholder="e.g., Computer Science, Biology, Psychology..." class="form-input">
-                </div>
-                
-                <div class="form-group">
-                    <label>Research Interests (select all that apply)</label>
-                    <div class="interests-grid">
-                        <label class="interest-tag">
-                            <input type="checkbox" value="artificial intelligence">
-                            <span>Artificial Intelligence</span>
-                        </label>
-                        <label class="interest-tag">
-                            <input type="checkbox" value="machine learning">
-                            <span>Machine Learning</span>
-                        </label>
-                        <label class="interest-tag">
-                            <input type="checkbox" value="neuroscience">
-                            <span>Neuroscience</span>
-                        </label>
-                        <label class="interest-tag">
-                            <input type="checkbox" value="biotechnology">
-                            <span>Biotechnology</span>
-                        </label>
-                        <label class="interest-tag">
-                            <input type="checkbox" value="data science">
-                            <span>Data Science</span>
-                        </label>
-                        <label class="interest-tag">
-                            <input type="checkbox" value="psychology">
-                            <span>Psychology</span>
-                        </label>
-                        <label class="interest-tag">
-                            <input type="checkbox" value="computer vision">
-                            <span>Computer Vision</span>
-                        </label>
-                        <label class="interest-tag">
-                            <input type="checkbox" value="robotics">
-                            <span>Robotics</span>
-                        </label>
-                    </div>
-                </div>
-
-                <button class="btn btn-primary btn-large" id="get-recommendations-btn">
-                    <i class="fas fa-magic"></i>
-                    Find My Perfect Labs
-                </button>
+                <h2>Your Basic Lab Recommendations</h2>
+                <p>Based on your goals and interests from the AI Analysis above</p>
             </div>
 
             <!-- Recommendations Results -->
-            <div class="recommendations-results" id="recommendations-results" style="display: none;">
-                <h3>Your Personalized Lab Recommendations</h3>
+            <div class="recommendations-results" id="recommendations-results">
                 <div class="recommendations-grid" id="recommendations-grid">
                     <!-- Recommendations will be loaded here -->
                 </div>
@@ -355,9 +312,9 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-primary" onclick="contactLab()">
+                <button class="btn btn-primary" id="modal-draft-email-btn">
                     <i class="fas fa-envelope"></i>
-                    Contact Lab
+                    Draft Email
                 </button>
                 <button class="btn btn-secondary modal-close" onclick="closeModal()">
                     Close

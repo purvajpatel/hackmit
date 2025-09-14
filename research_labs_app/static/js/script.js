@@ -462,9 +462,6 @@ function renderProfessorLabsModal(professor, labs) {
     body.innerHTML = `
       <div class="rag-slide">
         ${cardHtml}
-        <div style="margin-top: 20px; text-align: center;">
-          <button class="btn btn-secondary" onclick="closeRagModal()">Close</button>
-        </div>
       </div>
     `;
   } else {
@@ -487,6 +484,18 @@ function openLabModal(indexOrLab) {
   if (modalWebsite)     modalWebsite.href = lab.url || '#';
   if (modalDescription) modalDescription.textContent = lab.description || '';
 
+  // Set up the draft email button
+  const draftBtn = $('#modal-draft-email-btn');
+  if (draftBtn) {
+    draftBtn.onclick = () => {
+      if (!currentStudentData) {
+        alert('Please complete the AI Analysis form first to draft an email.');
+        return;
+      }
+      draftEmail(lab.professor || '', lab.name || '');
+    };
+  }
+
   labModal.style.display = 'block';
   document.body.style.overflow = 'hidden';
 }
@@ -497,18 +506,33 @@ function closeModal() {
   document.body.style.overflow = 'auto';
 }
 
-// -------------------- Contact (placeholder) --------------------
-function contactLab() {
-  alert('Contact functionality would be implemented here. This could open an email client or contact form.');
-}
+// -------------------- Contact (removed - replaced with draft email) --------------------
 
 // -------------------- Basic Recommendations --------------------
 async function getRecommendations() {
-  const major = (majorInput?.value || '').trim();
-  const interests = $$('input[type="checkbox"]:checked').map(cb => cb.value);
+  // Get data from the AI Analysis form instead of separate form
+  let major = ($('#rag-major')?.value || '').trim();
+  let interests = $$('#rag-form .interest-tag input[type="checkbox"]:checked').map(cb => cb.value);
 
-  if (!major) { alert('Please enter your major to get recommendations.'); return; }
-  if (interests.length === 0) { alert('Please select at least one research interest.'); return; }
+  // Use stored student data from AI Analysis if available and form is empty
+  if (currentStudentData && (!major || interests.length === 0)) {
+    if (!major && currentStudentData.academic?.major) {
+      major = currentStudentData.academic.major;
+      const majorInput = $('#rag-major');
+      if (majorInput) majorInput.value = major;
+    }
+    if (interests.length === 0 && currentStudentData.goals?.interests) {
+      interests = currentStudentData.goals.interests;
+      // Check the corresponding checkboxes in the AI Analysis form
+      interests.forEach(interest => {
+        const checkbox = $(`#rag-form input[value="${interest}"]`);
+        if (checkbox) checkbox.checked = true;
+      });
+    }
+  }
+
+  if (!major) { alert('Please enter your major or complete the AI Analysis first to get recommendations.'); return; }
+  if (interests.length === 0) { alert('Please select at least one research interest or complete the AI Analysis first.'); return; }
 
   try {
     if (getRecommendationsBtn) {
@@ -528,16 +552,28 @@ async function getRecommendations() {
     }
 
     displayRecommendations(data.recommendations || []);
-    if (recommendationsResults) {
-      recommendationsResults.style.display = 'block';
-      recommendationsResults.scrollIntoView({ behavior: 'smooth' });
+    // Show the recommendations section
+    const recommendationsSection = $('#recommendations');
+    if (recommendationsSection) {
+      recommendationsSection.style.display = 'block';
+      recommendationsSection.scrollIntoView({ behavior: 'smooth' });
+    }
+    
+    // Show a notice if we used stored data
+    if (currentStudentData && (currentStudentData.academic?.major === major || 
+        (currentStudentData.goals?.interests && currentStudentData.goals.interests.some(i => interests.includes(i))))) {
+      const notice = document.createElement('div');
+      notice.style.cssText = 'background: var(--surface); border: 1px solid var(--accent); border-radius: var(--radius); padding: 15px; margin-bottom: 20px; text-align: center;';
+      notice.innerHTML = '<i class="fas fa-info-circle" style="color: var(--accent); margin-right: 8px;"></i>Used information from your AI Analysis to enhance recommendations.';
+      recommendationsGrid.parentNode.insertBefore(notice, recommendationsGrid);
+      setTimeout(() => notice.remove(), 5000);
     }
   } catch (err) {
     console.error('Error getting recommendations:', err);
     showError('Failed to get recommendations. Please try again.');
   } finally {
     if (getRecommendationsBtn) {
-      getRecommendationsBtn.innerHTML = '<i class="fas fa-magic"></i> Find My Perfect Labs';
+      getRecommendationsBtn.innerHTML = '<i class="fas fa-magic"></i> Get Basic Recommendations';
       getRecommendationsBtn.disabled = false;
     }
   }
@@ -838,13 +874,14 @@ function renderRAGModalSlide(index) {
     body.innerHTML = `
       <div class="rag-slide">
         ${cardHtml}
+        ${ragRecs.length > 1 ? `
         <div class="rag-controls" style="margin-top:20px;display:flex;justify-content:space-between;gap:10px;">
           <button class="btn btn-secondary" onclick="prevRagRec()" ${index === 0 ? 'disabled' : ''}>← Prev</button>
           <button class="btn btn-primary" onclick="nextRagRec()" ${index === ragRecs.length-1 ? 'disabled' : ''}>Next →</button>
         </div>
         <p style="margin-top:10px;text-align:center;color:var(--text-secondary);">
           ${index+1} of ${ragRecs.length}
-        </p>
+        </p>` : ''}
       </div>
     `;
   }
