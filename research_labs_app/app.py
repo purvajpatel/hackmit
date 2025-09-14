@@ -5,6 +5,8 @@ import json, os, uuid
 import re
 from pypdf import PdfReader
 from datetime import datetime
+from lab_data_service import LabDataService
+import asyncio
 
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 DATA_DIR = os.path.join(BASE_DIR, 'data')
@@ -36,17 +38,27 @@ except Exception as e:
 
 AI_PROVIDER = os.getenv('AI_PROVIDER', 'gemini').lower()
 def load_labs_data():
-    path = os.path.join(DATA_DIR, 'utd_all_labs.json')
+    """Load lab data, preferring populated data from MCP agent over static data"""
+    # First try to load populated lab data from MCP agent
+    populated_path = os.path.join(DATA_DIR, 'utd_all_labs.json')
+    
     try:
-        with open(path, 'r', encoding='utf-8') as f:
+        with open(populated_path, 'r', encoding='utf-8') as f:
             data = json.load(f)
-            return data if isinstance(data, list) else []
-    except FileNotFoundError:
-        print(f"[WARN] Labs data not found at {path}. Returning empty list.")
-        return []
-    except json.JSONDecodeError as e:
-        print(f"[ERROR] Failed to parse labs JSON: {e}")
-        return []
+            if isinstance(data, list) and len(data) > 0:
+                # Check if this looks like populated data (has proper professor names)
+                populated_labs = [lab for lab in data if lab.get('professor') and 
+                                lab['professor'] not in ['Not specified', 'Faculty Member', 'Unknown']]
+                if len(populated_labs) > 5:  # If we have good populated data
+                    print(f"[INFO] Using populated lab data with {len(data)} labs ({len(populated_labs)} with professors)")
+                    return data
+    except (FileNotFoundError, json.JSONDecodeError) as e:
+        print(f"[WARN] Could not load populated labs data: {e}")
+    
+    # Fallback: return empty list - user should run populate script
+    print("[INFO] No populated lab data found. Consider running 'python populate_lab_data.py' first.")
+    print("[INFO] Using empty lab data - AI recommendations will be limited.")
+    return []
 
 def allowed_file(filename: str) -> bool:
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
@@ -412,6 +424,16 @@ def rag_recommendations():
             f.save(transcript_path)
 
         labs_data = load_labs_data()
+        
+        # If no populated lab data, suggest running the populate script
+        if not labs_data:
+            print("[WARN] No lab data available for AI recommendations.")
+            print("[HINT] Run 'python populate_lab_data.py' to populate lab data from major universities.")
+            # Return helpful message to user
+            return jsonify({
+                'error': 'No lab data available for recommendations. Please populate lab data first.',
+                'hint': 'Run the populate script or use the university search feature to get lab data.'
+            }), 404
 
         transcript_text = extract_pdf_text(transcript_path) if transcript_path else ''
         coursework = extract_coursework_hint(transcript_text)
@@ -448,10 +470,63 @@ def rag_recommendations():
         return jsonify({'recommendations': recs})
     except Exception as e:
         return jsonify({'error': str(e)}), 500
-    finally:
-        if transcript_path and os.path.exists(transcript_path):
-            try: os.remove(transcript_path)
-            except OSError: pass
+
+@app.route('/api/populate-labs', methods=['POST'])
+def populate_labs():
+    """Populate lab data from major universities using MCP agents"""
+    try:
+        # Initialize the lab data service
+        lab_service = LabDataService()
+        
+        # Run the population in a background task
+        async def populate_async():
+            labs = await lab_service.populate_major_universities()
+            lab_service.save_labs_to_file(labs)
+            return labs
+        
+        # Run the async function
+        labs = asyncio.run(populate_async())
+        
+        return jsonify({
+            'message': f'Successfully populated {len(labs)} labs from major universities',
+            'lab_count': len(labs),
+            'labs': labs[:5]  # Return first 5 as preview
+        })
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/api/search-university-labs', methods=['POST'])
+def search_university_labs():
+    """Search for labs at a specific university using MCP agents"""
+    try:
+        data = request.get_json()
+        university_name = data.get('university_name', '').strip()
+        
+        if not university_name:
+            return jsonify({'error': 'University name is required'}), 400
+        
+        # Initialize the lab data service
+        lab_service = LabDataService()
+        
+        # Run the async search
+        import asyncio
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+        
+        try:
+            labs = loop.run_until_complete(lab_service.search_university_labs(university_name, limit=20))
+        finally:
+            loop.close()
+        
+        return jsonify({
+            'success': True,
+            'university': university_name,
+            'labs': labs,
+            'count': len(labs)
+        })
+        
+    except Exception as e:
+        return jsonify({'error': f'Failed to search university labs: {str(e)}'}), 500
 
 @app.route('/api/draft-email', methods=['POST'])
 def draft_email():
@@ -527,6 +602,20 @@ def draft_email():
         return jsonify({'error': f'Failed to generate email: {str(e)}'}), 500
 
 if __name__ == '__main__':
+    print("OpenAI advisor not available: No module named 'openai_advisor'")
     print("Starting ResearchConnect…")
-    print(f"Gemini RAG features: {'Enabled' if GEMINI_AVAILABLE else 'Disabled'}")
-    app.run(debug=True, port=8080)
+    if GEMINI_AVAILABLE:
+        print("Gemini RAG features: Enabled")
+    else:
+        print("Gemini RAG features: Disabled (missing dependencies)")
+    
+    # Check if lab data exists on startup
+    labs_data = load_labs_data()
+    if not labs_data:
+        print("\n⚠️  No populated lab data found!")
+        print("💡 To enable AI recommendations, run: python populate_lab_data.py")
+        print("🔬 Or use the 'Populate Labs' feature in the web interface\n")
+    else:
+        print(f"✅ Loaded {len(labs_data)} labs for AI recommendations\n")
+    
+    app.run(debug=True, host='127.0.0.1', port=8080)

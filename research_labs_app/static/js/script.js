@@ -20,6 +20,8 @@ const schoolFilter           = $('#school-filter');
 const professorFilter        = $('#professor-filter');
 const labsGrid               = $('#labs-grid');
 const loadMoreBtn            = $('#load-more-btn');
+const universitySearchInput  = $('#university-search-input');
+const searchUniversityBtn    = $('#search-university-btn');
 
 const majorInput             = $('#major');
 const getRecommendationsBtn  = $('#get-recommendations-btn');
@@ -158,6 +160,12 @@ function setupEventListeners() {
 
   // Recommendations
   getRecommendationsBtn?.addEventListener('click', getRecommendations);
+
+  // University search
+  searchUniversityBtn?.addEventListener('click', searchUniversityLabs);
+  universitySearchInput?.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') searchUniversityLabs();
+  });
 
   // Lab modal close on backdrop click
   labModal?.addEventListener('click', (e) => {
@@ -504,6 +512,88 @@ function closeModal() {
   if (!labModal) return;
   labModal.style.display = 'none';
   document.body.style.overflow = 'auto';
+}
+
+// -------------------- University Search --------------------
+async function searchUniversityLabs() {
+  const universityName = (universitySearchInput?.value || '').trim();
+  
+  if (!universityName) {
+    alert('Please enter a university name to search for labs.');
+    return;
+  }
+  
+  try {
+    if (searchUniversityBtn) {
+      searchUniversityBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Searching...';
+      searchUniversityBtn.disabled = true;
+    }
+    
+    const resp = await fetch('/api/search-university-labs', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ university_name: universityName })
+    });
+    
+    const data = await resp.json();
+    if (!resp.ok || data.error) {
+      throw new Error(data.error || `Search failed (${resp.status})`);
+    }
+    
+    // Replace current labs with search results
+    allLabs = data.labs || [];
+    filteredLabs = [...allLabs];
+    currentPage = 1;
+    
+    // Update the section header to show search results
+    const sectionHeader = $('.explore .section-header');
+    if (sectionHeader) {
+      sectionHeader.innerHTML = `
+        <h2>Research Labs at ${data.university}</h2>
+        <p>Found ${data.count} labs using AI-powered search</p>
+        <button class="btn btn-secondary btn-small" onclick="resetToDefaultLabs()" style="margin-top: 10px;">
+          <i class="fas fa-arrow-left"></i>
+          Back to All Universities
+        </button>
+      `;
+    }
+    
+    // Clear filters and display results
+    if (schoolFilter) schoolFilter.value = '';
+    if (professorFilter) professorFilter.value = '';
+    if (searchInput) searchInput.value = '';
+    
+    displayLabs();
+    
+    // Scroll to results
+    labsGrid?.scrollIntoView({ behavior: 'smooth' });
+    
+  } catch (err) {
+    console.error('Error searching university labs:', err);
+    showError(err.message || 'Failed to search university labs. Please try again.');
+  } finally {
+    if (searchUniversityBtn) {
+      searchUniversityBtn.innerHTML = '<i class="fas fa-search"></i> Search University Labs';
+      searchUniversityBtn.disabled = false;
+    }
+  }
+}
+
+function resetToDefaultLabs() {
+  // Reset to original labs data
+  loadLabs();
+  
+  // Reset section header
+  const sectionHeader = $('.explore .section-header');
+  if (sectionHeader) {
+    sectionHeader.innerHTML = `
+      <h2>Explore Research Labs</h2>
+      <p>Browse through our comprehensive database of research laboratories</p>
+    `;
+  }
+  
+  // Clear university search input
+  if (universitySearchInput) universitySearchInput.value = '';
 }
 
 // -------------------- Contact (removed - replaced with draft email) --------------------
@@ -1105,6 +1195,7 @@ function escapeHtml(str) {
 window.openLabModal = openLabModal;
 window.closeModal   = closeModal;
 window.toggleTheme  = toggleTheme;
+window.resetToDefaultLabs = resetToDefaultLabs;
 // Optional alias if your HTML calls removeFile()
 window.removeFile   = removeRAGFile;
 window.nextRagRec = nextRagRec;
