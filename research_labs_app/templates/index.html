@@ -359,7 +359,85 @@
                     <i class="fas fa-copy"></i>
                     Copy Email
                 </button>
+                <button class="btn btn-secondary" onclick="openInterviewModal()">
+                    <i class="fas fa-microphone"></i>
+                    Practice Interview
+                </button>
                 <button class="btn btn-secondary modal-close" onclick="closeEmailModal()">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Practice Interview Modal -->
+    <div class="modal" id="interview-modal">
+        <div class="modal-content interview-modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-microphone"></i> Practice Interview Questions (1 min each)</h3>
+            </div>
+            <div class="modal-body">
+                <div class="interview-content">
+                    <div class="interview-questions">
+                        <h4>Potential Interview Questions:</h4>
+                        <div class="questions-loading" id="questions-loading" style="display: none;">
+                            <div class="spinner"></div>
+                            <p>Generating lab-specific questions...</p>
+                        </div>
+                        <div class="questions-list" id="questions-list">
+                            <!-- Generated questions will be inserted here -->
+                        </div>
+                        <div class="current-question" id="current-question" style="display: none;">
+                            <h5>Current Question:</h5>
+                            <div class="question-text" id="question-text"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="interview-recording-section">
+                        <div class="recording-controls">
+                            <button class="btn btn-primary" id="record-btn" onclick="startRecording()" disabled>
+                                <i class="fas fa-microphone"></i>
+                                Record Answer (1 min)
+                            </button>
+                            <button class="btn btn-secondary" id="stop-btn" onclick="stopRecording()" disabled>
+                                <i class="fas fa-stop"></i>
+                                Stop
+                            </button>
+                            <div class="timer-display" id="timer-display">01:00</div>
+                        </div>
+                        
+                        <div class="audio-playback" id="audio-playback" style="display: none;">
+                            <audio controls id="recorded-audio">
+                                Your browser does not support the audio element.
+                            </audio>
+                        </div>
+                        
+                        <div class="feedback-controls" id="feedback-controls" style="display: none;">
+                            <button class="btn btn-primary" id="get-feedback-btn" onclick="getFeedback()">
+                                <i class="fas fa-robot"></i>
+                                Analyze My Answer
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="interview-feedback" id="interview-feedback" style="display: none;">
+                        <h4>Interview Feedback:</h4>
+                        <div class="feedback-content" id="feedback-content">
+                            <!-- AI feedback will be inserted here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="nextQuestion()" id="next-question-btn" style="display: none;">
+                    <i class="fas fa-arrow-right"></i>
+                    Next Question
+                </button>
+                <button class="btn btn-secondary" onclick="resetInterviewModal()">
+                    <i class="fas fa-redo"></i>
+                    Try Again
+                </button>
+                <button class="btn btn-secondary modal-close" onclick="closeInterviewModal()">
                     Close
                 </button>
             </div>

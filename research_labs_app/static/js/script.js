@@ -931,6 +931,14 @@ window.closeRagModal = closeRagModal;
 // -------------------- Email Drafting Functions --------------------
 let currentStudentData = null;
 let currentTranscriptText = null;
+let currentEmailText = null;
+
+// -------------------- Practice Your Pitch Functions --------------------
+let mediaRecorder = null;
+let audioChunks = [];
+let recordingTimer = null;
+let timeLeft = 60;
+let recordedBlob = null;
 
 function draftEmail(professorName, labName) {
   console.log('Current student data:', currentStudentData);
@@ -986,6 +994,17 @@ function showEmailModal(emailText, professorName, labName) {
     professorEl.textContent = professorName;
     labEl.textContent = labName;
     emailEl.textContent = emailText;
+    currentEmailText = emailText;
+    
+    // Store lab context for interview practice
+    currentProfessorName = professorName;
+    currentLabName = labName;
+    // Try to get lab description from current lab data
+    const currentLab = allLabs.find(lab => 
+      lab.professor === professorName && lab.name === labName
+    );
+    currentLabDescription = currentLab ? currentLab.description : 'Research laboratory';
+    
     modal.style.display = 'grid';
     document.body.style.overflow = 'hidden';
   }
@@ -1023,11 +1042,310 @@ function storeTranscriptText(transcriptText) {
   currentTranscriptText = transcriptText;
 }
 
+// Interview Practice Modal Functions
+let currentQuestions = [];
+let currentQuestionIndex = 0;
+let currentProfessorName = '';
+let currentLabName = '';
+let currentLabDescription = '';
+
+function openInterviewModal() {
+  const interviewModal = document.getElementById('interview-modal');
+  
+  if (interviewModal) {
+    resetInterviewModal();
+    generateQuestions();
+    interviewModal.style.display = 'grid';
+    document.body.style.overflow = 'hidden';
+  }
+}
+
+function closeInterviewModal() {
+  const modal = document.getElementById('interview-modal');
+  if (modal) {
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto';
+    stopRecording(); // Stop any ongoing recording
+    resetTimer();
+  }
+}
+
+function resetInterviewModal() {
+  // Reset all states
+  audioChunks = [];
+  recordedBlob = null;
+  timeLeft = 60;
+  currentQuestions = [];
+  currentQuestionIndex = 0;
+  
+  // Reset UI elements
+  document.getElementById('record-btn').disabled = true;
+  document.getElementById('stop-btn').disabled = true;
+  document.getElementById('timer-display').textContent = '01:00';
+  document.getElementById('audio-playback').style.display = 'none';
+  document.getElementById('feedback-controls').style.display = 'none';
+  document.getElementById('interview-feedback').style.display = 'none';
+  document.getElementById('current-question').style.display = 'none';
+  document.getElementById('next-question-btn').style.display = 'none';
+  document.getElementById('questions-list').innerHTML = '';
+  
+  // Reset button text
+  const recordBtn = document.getElementById('record-btn');
+  recordBtn.innerHTML = '<i class="fas fa-microphone"></i> Record Answer (1 min)';
+}
+
+async function startRecording() {
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    mediaRecorder = new MediaRecorder(stream);
+    audioChunks = [];
+    
+    mediaRecorder.ondataavailable = (event) => {
+      audioChunks.push(event.data);
+    };
+    
+    mediaRecorder.onstop = () => {
+      recordedBlob = new Blob(audioChunks, { type: 'audio/wav' });
+      const audioUrl = URL.createObjectURL(recordedBlob);
+      const audioEl = document.getElementById('recorded-audio');
+      audioEl.src = audioUrl;
+      
+      // Show playback and feedback controls
+      document.getElementById('audio-playback').style.display = 'block';
+      document.getElementById('feedback-controls').style.display = 'block';
+      
+      // Stop all tracks to release microphone
+      stream.getTracks().forEach(track => track.stop());
+    };
+    
+    mediaRecorder.start();
+    
+    // Update UI
+    document.getElementById('record-btn').disabled = true;
+    document.getElementById('stop-btn').disabled = false;
+    
+    // Start timer
+    startTimer();
+    
+  } catch (error) {
+    console.error('Error accessing microphone:', error);
+    alert('Could not access microphone. Please check your browser permissions.');
+  }
+}
+
+function stopRecording() {
+  if (mediaRecorder && mediaRecorder.state !== 'inactive') {
+    mediaRecorder.stop();
+    resetTimer();
+    
+    // Update UI
+    document.getElementById('record-btn').disabled = false;
+    document.getElementById('stop-btn').disabled = true;
+  }
+}
+
+function startTimer() {
+  timeLeft = 60;
+  updateTimerDisplay();
+  
+  recordingTimer = setInterval(() => {
+    timeLeft--;
+    updateTimerDisplay();
+    
+    if (timeLeft <= 0) {
+      stopRecording();
+    }
+  }, 1000);
+}
+
+function resetTimer() {
+  if (recordingTimer) {
+    clearInterval(recordingTimer);
+    recordingTimer = null;
+  }
+  timeLeft = 60;
+  updateTimerDisplay();
+}
+
+function updateTimerDisplay() {
+  const minutes = Math.floor(timeLeft / 60);
+  const seconds = timeLeft % 60;
+  const display = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+  document.getElementById('timer-display').textContent = display;
+}
+
+async function generateQuestions() {
+  const loadingEl = document.getElementById('questions-loading');
+  const questionsListEl = document.getElementById('questions-list');
+  
+  try {
+    loadingEl.style.display = 'block';
+    
+    // Get lab info from current context (you'll need to store this when opening modal)
+    const response = await fetch('/generate_questions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        professor_name: currentProfessorName || 'Professor',
+        lab_name: currentLabName || 'Research Lab',
+        lab_description: currentLabDescription || 'Research laboratory'
+      })
+    });
+    
+    const result = await response.json();
+    
+    if (response.ok && result.success) {
+      currentQuestions = result.questions;
+      displayQuestions(currentQuestions);
+      if (currentQuestions.length > 0) {
+        showQuestion(0);
+      }
+    } else {
+      throw new Error(result.error || 'Failed to generate questions');
+    }
+    
+  } catch (error) {
+    console.error('Error generating questions:', error);
+    // Use fallback questions
+    currentQuestions = [
+      "Tell me about your background and what interests you about our research.",
+      "What programming languages or technical skills do you have experience with?",
+      "How do you approach solving complex problems you haven't encountered before?",
+      "What is your availability for research work during the semester?",
+      "What do you know about the work we do in our lab?"
+    ];
+    displayQuestions(currentQuestions);
+    showQuestion(0);
+  } finally {
+    loadingEl.style.display = 'none';
+  }
+}
+
+function displayQuestions(questions) {
+  const questionsListEl = document.getElementById('questions-list');
+  questionsListEl.innerHTML = '';
+  
+  questions.forEach((question, index) => {
+    const questionEl = document.createElement('div');
+    questionEl.className = 'question-item';
+    questionEl.innerHTML = `
+      <span class="question-number">${index + 1}.</span>
+      <span class="question-text">${escapeHtml(question)}</span>
+    `;
+    questionsListEl.appendChild(questionEl);
+  });
+}
+
+function showQuestion(index) {
+  if (index >= 0 && index < currentQuestions.length) {
+    currentQuestionIndex = index;
+    const questionTextEl = document.getElementById('question-text');
+    const currentQuestionEl = document.getElementById('current-question');
+    
+    questionTextEl.textContent = currentQuestions[index];
+    currentQuestionEl.style.display = 'block';
+    
+    // Enable recording for this question
+    document.getElementById('record-btn').disabled = false;
+    
+    // Reset recording state
+    document.getElementById('audio-playback').style.display = 'none';
+    document.getElementById('feedback-controls').style.display = 'none';
+    document.getElementById('interview-feedback').style.display = 'none';
+  }
+}
+
+function nextQuestion() {
+  if (currentQuestionIndex < currentQuestions.length - 1) {
+    showQuestion(currentQuestionIndex + 1);
+  }
+}
+
+async function getFeedback() {
+  if (!recordedBlob) {
+    alert('No recording found. Please record your answer first.');
+    return;
+  }
+  
+  const feedbackBtn = document.getElementById('get-feedback-btn');
+  const originalText = feedbackBtn.innerHTML;
+  
+  try {
+    // Show loading state
+    feedbackBtn.innerHTML = '<div class="spinner"></div> Analyzing...';
+    feedbackBtn.disabled = true;
+    
+    // Prepare form data
+    const formData = new FormData();
+    formData.append('audio', recordedBlob, 'interview.wav');
+    formData.append('question_text', currentQuestions[currentQuestionIndex] || '');
+    formData.append('lab_context', `${currentLabName} - ${currentLabDescription}`);
+    
+    // Send to backend
+    const response = await fetch('/analyze_interview', {
+      method: 'POST',
+      body: formData
+    });
+    
+    const result = await response.json();
+    
+    if (response.ok && result.success) {
+      displayFeedback(result.feedback);
+      // Show next question button if there are more questions
+      if (currentQuestionIndex < currentQuestions.length - 1) {
+        document.getElementById('next-question-btn').style.display = 'inline-block';
+      }
+    } else {
+      throw new Error(result.error || 'Failed to analyze interview');
+    }
+    
+  } catch (error) {
+    console.error('Error getting feedback:', error);
+    alert('Failed to analyze your answer. Please try again.');
+  } finally {
+    // Restore button state
+    feedbackBtn.innerHTML = originalText;
+    feedbackBtn.disabled = false;
+  }
+}
+
+function displayFeedback(feedback) {
+  const feedbackPanel = document.getElementById('interview-feedback');
+  const feedbackContent = document.getElementById('feedback-content');
+  
+  if (feedbackPanel && feedbackContent) {
+    // Convert feedback text to HTML with proper formatting
+    const formattedFeedback = formatFeedbackText(feedback);
+    feedbackContent.innerHTML = formattedFeedback;
+    feedbackPanel.style.display = 'block';
+    
+    // Scroll to feedback
+    feedbackPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+}
+
+function formatFeedbackText(text) {
+  return text
+    .replace(/\*\*(.*?)\*\*/g, '<strong style="color: var(--accent); font-weight: 700;">$1</strong>')
+    .replace(/\*(.*?)\*/g, '<em>$1</em>')
+    .replace(/\n\n/g, '</p><p>')
+    .replace(/\n/g, '<br>');
+}
+
 // Expose functions globally
 window.draftEmail = draftEmail;
 window.closeEmailModal = closeEmailModal;
 window.copyEmail = copyEmail;
 window.storeStudentData = storeStudentData;
+window.openInterviewModal = openInterviewModal;
+window.closeInterviewModal = closeInterviewModal;
+window.resetInterviewModal = resetInterviewModal;
+window.nextQuestion = nextQuestion;
+window.startRecording = startRecording;
+window.stopRecording = stopRecording;
+window.getFeedback = getFeedback;
 
 // -------------------- Stats Animation --------------------
 function animateStats() {

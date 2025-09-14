@@ -5,6 +5,8 @@ import json, os, uuid
 import re
 from pypdf import PdfReader
 from datetime import datetime
+import tempfile
+import io
 
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 DATA_DIR = os.path.join(BASE_DIR, 'data')
@@ -526,7 +528,345 @@ def draft_email():
     except Exception as e:
         return jsonify({'error': f'Failed to generate email: {str(e)}'}), 500
 
+@app.route('/generate_questions', methods=['POST'])
+def generate_questions():
+    """Generate interview questions based on lab information"""
+    try:
+        data = request.get_json()
+        professor_name = data.get('professor_name', '')
+        lab_name = data.get('lab_name', '')
+        lab_description = data.get('lab_description', '')
+        
+        if not professor_name or not lab_name:
+            return jsonify({'error': 'Professor name and lab name are required'}), 400
+        
+        # Generate questions using AI
+        questions = generate_interview_questions(professor_name, lab_name, lab_description)
+        
+        return jsonify({
+            'success': True,
+            'questions': questions
+        })
+        
+    except Exception as e:
+        return jsonify({'error': f'Failed to generate questions: {str(e)}'}), 500
+
+@app.route('/analyze_interview', methods=['POST'])
+def analyze_interview():
+    """Analyze uploaded interview answer audio and provide AI feedback"""
+    try:
+        # Get uploaded audio file
+        audio_file = request.files.get('audio')
+        question_text = request.form.get('question_text', '')
+        lab_context = request.form.get('lab_context', '')
+        
+        if not audio_file:
+            return jsonify({'error': 'No audio file provided'}), 400
+        
+        # Save audio file temporarily
+        with tempfile.NamedTemporaryFile(delete=False, suffix='.wav') as temp_audio:
+            audio_file.save(temp_audio.name)
+            temp_audio_path = temp_audio.name
+        
+        try:
+            # Transcribe audio using Gemini (or fallback to OpenAI)
+            transcript = transcribe_audio(temp_audio_path)
+            
+            # Generate feedback using AI
+            feedback = generate_interview_feedback(transcript, question_text, lab_context)
+            
+            return jsonify({
+                'success': True,
+                'transcript': transcript,
+                'feedback': feedback
+            })
+            
+        finally:
+            # Clean up temporary file
+            if os.path.exists(temp_audio_path):
+                os.remove(temp_audio_path)
+                
+    except Exception as e:
+        return jsonify({'error': f'Failed to analyze interview: {str(e)}'}), 500
+
+def transcribe_audio(audio_path):
+    """Transcribe audio using available AI provider"""
+    try:
+        if AI_PROVIDER == 'gemini' and GEMINI_AVAILABLE:
+            return transcribe_with_gemini(audio_path)
+        elif AI_PROVIDER == 'openai' and OPENAI_AVAILABLE:
+            return transcribe_with_openai(audio_path)
+        else:
+            # Fallback: return a placeholder transcript
+            return "[Audio transcription not available - using mock transcript for demo]"
+    except Exception as e:
+        print(f"Transcription error: {e}")
+        return "[Transcription failed - using mock transcript for demo]"
+
+def transcribe_with_gemini(audio_path):
+    """Transcribe audio using Gemini"""
+    try:
+        import google.generativeai as genai
+        
+        # Upload audio file to Gemini
+        audio_file = genai.upload_file(audio_path)
+        
+        # Configure Gemini model
+        model = genai.GenerativeModel('gemini-1.5-flash')
+        
+        # Generate transcription
+        response = model.generate_content([
+            "Please transcribe this audio file accurately. Only return the transcription text, no additional commentary.",
+            audio_file
+        ])
+        
+        return response.text.strip()
+        
+    except Exception as e:
+        print(f"Gemini transcription error: {e}")
+        raise
+
+def transcribe_with_openai(audio_path):
+    """Transcribe audio using OpenAI Whisper"""
+    try:
+        import openai
+        
+        with open(audio_path, 'rb') as audio_file:
+            transcript = openai.Audio.transcribe(
+                model="whisper-1",
+                file=audio_file
+            )
+        
+        return transcript.text.strip()
+        
+    except Exception as e:
+        print(f"OpenAI transcription error: {e}")
+        raise
+
+def generate_interview_questions(professor_name, lab_name, lab_description):
+    """Generate interview questions based on lab information"""
+    try:
+        if AI_PROVIDER == 'gemini' and GEMINI_AVAILABLE:
+            return generate_questions_with_gemini(professor_name, lab_name, lab_description)
+        elif AI_PROVIDER == 'openai' and OPENAI_AVAILABLE:
+            return generate_questions_with_openai(professor_name, lab_name, lab_description)
+        else:
+            # Fallback mock questions
+            return generate_mock_questions(professor_name, lab_name)
+    except Exception as e:
+        print(f"Question generation error: {e}")
+        return generate_mock_questions(professor_name, lab_name)
+
+def generate_interview_feedback(transcript, question_text, lab_context):
+    """Generate AI feedback for interview answer"""
+    try:
+        if AI_PROVIDER == 'gemini' and GEMINI_AVAILABLE:
+            return generate_interview_feedback_with_gemini(transcript, question_text, lab_context)
+        elif AI_PROVIDER == 'openai' and OPENAI_AVAILABLE:
+            return generate_interview_feedback_with_openai(transcript, question_text, lab_context)
+        else:
+            # Fallback mock feedback
+            return generate_mock_interview_feedback(transcript, question_text)
+    except Exception as e:
+        print(f"Feedback generation error: {e}")
+        return generate_mock_interview_feedback(transcript, question_text)
+
+def generate_questions_with_gemini(professor_name, lab_name, lab_description):
+    """Generate interview questions using Gemini"""
+    try:
+        import google.generativeai as genai
+        
+        model = genai.GenerativeModel('gemini-1.5-flash')
+        
+        prompt = f"""You are a research professor conducting interviews for undergraduate research positions.
+
+Generate 5 realistic interview questions that {professor_name} from {lab_name} might ask a student.
+
+Lab Context:
+{lab_description}
+
+Generate questions that cover:
+1. Technical background and skills
+2. Research interest and motivation
+3. Problem-solving approach
+4. Time commitment and availability
+5. Specific knowledge related to the lab's research area
+
+Return ONLY a JSON array of question strings, no additional text.
+Example format: ["Question 1?", "Question 2?", "Question 3?", "Question 4?", "Question 5?"]"""
+        
+        response = model.generate_content(prompt)
+        
+        # Parse JSON response
+        import json
+        try:
+            questions = json.loads(response.text.strip())
+            return questions if isinstance(questions, list) else []
+        except json.JSONDecodeError:
+            # Fallback if JSON parsing fails
+            return generate_mock_questions(professor_name, lab_name)
+        
+    except Exception as e:
+        print(f"Gemini question generation error: {e}")
+        raise
+
+def generate_interview_feedback_with_gemini(transcript, question_text, lab_context):
+    """Generate interview feedback using Gemini"""
+    try:
+        import google.generativeai as genai
+        
+        model = genai.GenerativeModel('gemini-1.5-flash')
+        
+        prompt = f"""You are an expert interview coach helping students prepare for research lab interviews.
+
+The student was asked this question:
+**Question:** {question_text}
+
+**Lab Context:** {lab_context}
+
+**Student's Answer Transcript:**
+{transcript}
+
+Analyze their answer in these categories:
+- **Content Quality**: Did they answer the question thoroughly and demonstrate relevant knowledge?
+- **Communication Skills**: How clear and articulate was their response?
+- **Enthusiasm & Interest**: Did they show genuine passion for the research?
+- **Professionalism**: How professional and prepared did they sound?
+- **Overall Impression**: What's your assessment of their interview performance?
+
+Then give 2-3 specific, actionable tips to improve their answer.
+Use second person ("you") and be constructive but direct.
+Format your response with bold section headers and clear feedback."""
+        
+        response = model.generate_content(prompt)
+        return response.text.strip()
+        
+    except Exception as e:
+        print(f"Gemini interview feedback error: {e}")
+        raise
+
+def generate_questions_with_openai(professor_name, lab_name, lab_description):
+    """Generate interview questions using OpenAI"""
+    try:
+        import openai
+        
+        prompt = f"""You are a research professor conducting interviews for undergraduate research positions.
+
+Generate 5 realistic interview questions that {professor_name} from {lab_name} might ask a student.
+
+Lab Context:
+{lab_description}
+
+Generate questions that cover:
+1. Technical background and skills
+2. Research interest and motivation
+3. Problem-solving approach
+4. Time commitment and availability
+5. Specific knowledge related to the lab's research area
+
+Return ONLY a JSON array of question strings, no additional text.
+Example format: ["Question 1?", "Question 2?", "Question 3?", "Question 4?", "Question 5?"]"""
+        
+        response = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo",
+            messages=[
+                {"role": "system", "content": "You are a research professor conducting interviews."},
+                {"role": "user", "content": prompt}
+            ],
+            max_tokens=400,
+            temperature=0.7
+        )
+        
+        # Parse JSON response
+        import json
+        try:
+            questions = json.loads(response.choices[0].message.content.strip())
+            return questions if isinstance(questions, list) else []
+        except json.JSONDecodeError:
+            return generate_mock_questions(professor_name, lab_name)
+        
+    except Exception as e:
+        print(f"OpenAI question generation error: {e}")
+        raise
+
+def generate_interview_feedback_with_openai(transcript, question_text, lab_context):
+    """Generate interview feedback using OpenAI"""
+    try:
+        import openai
+        
+        prompt = f"""You are an expert interview coach helping students prepare for research lab interviews.
+
+The student was asked this question:
+**Question:** {question_text}
+
+**Lab Context:** {lab_context}
+
+**Student's Answer Transcript:**
+{transcript}
+
+Analyze their answer in these categories:
+- **Content Quality**: Did they answer the question thoroughly and demonstrate relevant knowledge?
+- **Communication Skills**: How clear and articulate was their response?
+- **Enthusiasm & Interest**: Did they show genuine passion for the research?
+- **Professionalism**: How professional and prepared did they sound?
+- **Overall Impression**: What's your assessment of their interview performance?
+
+Then give 2-3 specific, actionable tips to improve their answer.
+Use second person ("you") and be constructive but direct.
+Format your response with bold section headers and clear feedback."""
+        
+        response = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo",
+            messages=[
+                {"role": "system", "content": "You are an expert interview coach."},
+                {"role": "user", "content": prompt}
+            ],
+            max_tokens=800,
+            temperature=0.7
+        )
+        
+        return response.choices[0].message.content.strip()
+        
+    except Exception as e:
+        print(f"OpenAI interview feedback error: {e}")
+        raise
+
+def generate_mock_questions(professor_name, lab_name):
+    """Generate mock interview questions when AI providers are unavailable"""
+    return [
+        "Tell me about your background and what interests you about our research.",
+        "What programming languages or technical skills do you have experience with?",
+        "How do you approach solving complex problems you haven't encountered before?",
+        "What is your availability for research work during the semester?",
+        f"What do you know about the work we do in {lab_name}?"
+    ]
+
+def generate_mock_interview_feedback(transcript, question_text):
+    """Generate mock interview feedback when AI providers are unavailable"""
+    return """**Content Quality**
+Your answer addressed the main points of the question and showed relevant knowledge. You demonstrated understanding of the topic.
+
+**Communication Skills**
+Your response was clear and well-structured. You spoke at an appropriate pace and used professional language.
+
+**Enthusiasm & Interest**
+You conveyed genuine interest in the research opportunity. Your passion for the field comes through in your response.
+
+**Professionalism**
+You maintained a professional tone throughout your answer and showed good preparation.
+
+**Overall Impression**
+Solid interview response that demonstrates your qualifications and genuine interest in the position.
+
+**Actionable Tips:**
+1. **Add specific examples**: Include concrete examples from your coursework or projects that relate to the question
+2. **Connect to the lab's work**: Explicitly tie your answer back to the specific research being done in this lab
+3. **Show initiative**: Mention any additional steps you've taken to learn about this field or prepare for research
+
+*Note: This is demo feedback. Connect your AI provider for personalized analysis.*"""
+
 if __name__ == '__main__':
     print("Starting ResearchConnect…")
     print(f"Gemini RAG features: {'Enabled' if GEMINI_AVAILABLE else 'Disabled'}")
+    print(f"Interview Practice features: {'Enabled' if (GEMINI_AVAILABLE or OPENAI_AVAILABLE) else 'Mock Mode'}")
     app.run(debug=True, port=8080)

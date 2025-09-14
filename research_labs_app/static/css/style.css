@@ -242,6 +242,191 @@ body::before {
 
 /* ======= RAG SECTION ======= */
 .rag-analysis .section-header p { max-width: 640px; margin: 0 auto; }
+
+/* ======= PRACTICE YOUR PITCH MODAL ======= */
+.pitch-modal-content {
+  max-width: 700px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.pitch-content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.pitch-talking-points {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+}
+
+.pitch-talking-points h4 {
+  color: var(--accent);
+  margin: 0 0 12px 0;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.talking-points-text {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  font-family: 'Inter', monospace;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-2);
+  max-height: 200px;
+  overflow-y: auto;
+  white-space: pre-wrap;
+}
+
+.pitch-recording-section {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+}
+
+.recording-controls {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.timer-display {
+  font-family: 'Inter', monospace;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--accent);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 8px 16px;
+  min-width: 80px;
+  text-align: center;
+}
+
+.audio-playback {
+  margin: 16px 0;
+}
+
+.audio-playback audio {
+  width: 100%;
+  background: var(--surface-2);
+  border-radius: var(--radius-sm);
+}
+
+.feedback-controls {
+  margin-top: 16px;
+}
+
+.pitch-feedback {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+}
+
+.pitch-feedback h4 {
+  color: var(--accent);
+  margin: 0 0 16px 0;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.feedback-content {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 20px;
+  max-height: 400px;
+  overflow-y: auto;
+  line-height: 1.7;
+  color: var(--text-2);
+}
+
+.feedback-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.feedback-content::-webkit-scrollbar-track {
+  background: var(--surface);
+  border-radius: 4px;
+}
+
+.feedback-content::-webkit-scrollbar-thumb {
+  background: var(--text-2);
+  border-radius: 4px;
+}
+
+.feedback-content::-webkit-scrollbar-thumb:hover {
+  background: var(--text);
+}
+
+.feedback-content strong {
+  color: var(--accent);
+  font-weight: 700;
+  display: block;
+  margin: 16px 0 8px 0;
+  font-size: 15px;
+}
+
+.feedback-content strong:first-child {
+  margin-top: 0;
+}
+
+.feedback-content p {
+  margin: 8px 0;
+}
+
+.feedback-content em {
+  color: var(--muted);
+  font-style: italic;
+}
+
+/* Recording button states */
+#record-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+#stop-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .pitch-modal-content {
+    max-width: 95vw;
+    margin: 20px;
+  }
+  
+  .recording-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .timer-display {
+    align-self: center;
+  }
+  
+  .talking-points-text {
+    max-height: 150px;
+    font-size: 13px;
+  }
+  
+  .feedback-content {
+    max-height: 300px;
+    font-size: 14px;
+  }
+}
 .rag-form-container { display: grid; gap: 20px; }
 .rag-form { display: grid; gap: 20px; }
 .form-section { padding: 18px; border: 1px solid var(--border); border-radius: var(--radius); background: linear-gradient(180deg, var(--surface), var(--surface-2)); }
