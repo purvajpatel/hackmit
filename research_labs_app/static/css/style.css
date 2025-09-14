@@ -347,4 +347,55 @@ body::before {
     margin-left: auto !important;
     margin-right: auto !important;
     max-width: 820px !important;  /* keeps it readable */
-  }
+}
+
+/* ======= EMAIL MODAL STYLES ======= */
+.email-content {
+  padding: 20px 0;
+}
+
+.email-header {
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid var(--border);
+}
+
+.email-header h4 {
+  margin: 0 0 5px 0;
+  color: var(--accent);
+  font-size: 1.2rem;
+}
+
+.email-header p {
+  margin: 0;
+  color: var(--text-2);
+  font-size: 0.9rem;
+}
+
+.email-body {
+  background: var(--surface);
+  border-radius: var(--radius-sm);
+  padding: 20px;
+  border: 1px solid var(--border);
+}
+
+.email-body pre {
+  margin: 0;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--text);
+}
+
+.rag-card-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.rag-card-actions .btn {
+  flex: 1;
+  justify-content: center;
+}

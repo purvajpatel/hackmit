@@ -506,6 +506,13 @@ function onRAGSubmit(e) {
         }
       }
 
+      // Extract transcript text for later use
+      let transcript_text = '';
+      if (hasTranscript) {
+        // Note: We can't extract PDF text on the frontend, but we'll store the file info
+        transcript_text = 'Transcript uploaded - content will be parsed on backend';
+      }
+
       const fd = new FormData();
       fd.append('student_data', JSON.stringify(studentData));
       const file = ragTranscriptFile?.files?.[0];
@@ -517,6 +524,10 @@ function onRAGSubmit(e) {
       try { data = JSON.parse(text); } catch { data = { error: text }; }
 
       if (!resp.ok || data.error) throw new Error(data.error || `Upload failed (${resp.status})`);
+
+      // Store student data and transcript text for email drafting
+      storeStudentData(studentData);
+      storeTranscriptText(transcript_text);
 
       // Show results in modal
       const html = renderRAGHtml(data.recommendations || []);
@@ -641,6 +652,12 @@ function renderRAGCard(rec, indexInAll) {
         <div class="rag-card-description">${descriptionHTML}</div>
         ${skillsHtml}
         ${courseworkHtml}
+        <div class="rag-card-actions" style="margin-top: 15px;">
+          <button class="btn btn-primary btn-small" onclick="draftEmail('${escapeHtml(professor)}', '${escapeHtml(name)}')">
+            <i class="fas fa-envelope"></i>
+            Draft an Email
+          </button>
+        </div>
       </div>
     </div>
   `;
@@ -717,6 +734,107 @@ document.addEventListener('keydown', (e) => {
 // Expose for inline handler if needed
 window.openRagModal = openRagModal;
 window.closeRagModal = closeRagModal;
+
+// -------------------- Email Drafting Functions --------------------
+let currentStudentData = null;
+let currentTranscriptText = null;
+
+function draftEmail(professorName, labName) {
+  console.log('Current student data:', currentStudentData);
+  if (!currentStudentData) {
+    alert('No student data available. Please complete the AI Analysis form first.');
+    return;
+  }
+
+  // Show loading state
+  const button = event.target;
+  const originalText = button.innerHTML;
+  button.innerHTML = '<div class="spinner"></div> Drafting Email...';
+  button.disabled = true;
+
+  // Call the backend to generate email
+  fetch('/api/draft-email', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      professor_name: professorName,
+      lab_name: labName,
+      student_data: currentStudentData
+    })
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.success) {
+      showEmailModal(data.email, professorName, labName);
+    } else {
+      alert('Failed to generate email: ' + data.error);
+    }
+  })
+  .catch(error => {
+    console.error('Error:', error);
+    alert('Failed to generate email. Please try again.');
+  })
+  .finally(() => {
+    // Restore button state
+    button.innerHTML = originalText;
+    button.disabled = false;
+  });
+}
+
+function showEmailModal(emailText, professorName, labName) {
+  const modal = document.getElementById('email-modal');
+  const professorEl = document.getElementById('email-professor-name');
+  const labEl = document.getElementById('email-lab-name');
+  const emailEl = document.getElementById('email-text');
+
+  if (modal && professorEl && labEl && emailEl) {
+    professorEl.textContent = professorName;
+    labEl.textContent = labName;
+    emailEl.textContent = emailText;
+    modal.style.display = 'grid';
+    document.body.style.overflow = 'hidden';
+  }
+}
+
+function closeEmailModal() {
+  const modal = document.getElementById('email-modal');
+  if (modal) {
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto';
+  }
+}
+
+function copyEmail() {
+  const emailText = document.getElementById('email-text');
+  if (emailText) {
+    navigator.clipboard.writeText(emailText.textContent).then(() => {
+      alert('Email copied to clipboard!');
+    }).catch(err => {
+      console.error('Failed to copy: ', err);
+      alert('Failed to copy email to clipboard.');
+    });
+  }
+}
+
+// Store student data when RAG form is submitted
+function storeStudentData(studentData) {
+  console.log('Storing student data:', studentData);
+  currentStudentData = studentData;
+}
+
+// Store transcript text when RAG form is submitted
+function storeTranscriptText(transcriptText) {
+  console.log('Storing transcript text:', transcriptText);
+  currentTranscriptText = transcriptText;
+}
+
+// Expose functions globally
+window.draftEmail = draftEmail;
+window.closeEmailModal = closeEmailModal;
+window.copyEmail = copyEmail;
+window.storeStudentData = storeStudentData;
 
 // -------------------- Stats Animation --------------------
 function animateStats() {

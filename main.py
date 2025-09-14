@@ -111,33 +111,61 @@ Output only the final email (subject + body).
 
 
 async def main():
-    recipient_info = str()
-    choice = True
+    import sys
     
-    
-    if choice:
-        recipient_info = await research_query('Give me information about Richard Golden from UT Dallas')
+    # Check if running from command line with arguments
+    if len(sys.argv) > 1:
+        # Running from Flask app - get professor and lab info from command line
+        professor_name = sys.argv[1] if len(sys.argv) > 1 else "Unknown Professor"
+        lab_name = sys.argv[2] if len(sys.argv) > 2 else "Unknown Lab"
+        recipient_info = f"Professor: {professor_name}, Lab: {lab_name}"
+        
+        # Try to load student.json if it exists
+        student_file = "student.json"
+        if os.path.exists(student_file):
+            with open(student_file, "r") as f:
+                character_profile = json.load(f)
+        else:
+            # Fallback to default character
+            with open("student_cs.json", "r") as f:
+                character_profile = json.load(f)
     else:
-        recipient_info = USER_IDS[username][0]
+        # Running normally - use research query
+        recipient_info = await research_query('Give me information about Richard Golden from UT Dallas')
+        with open("student_cs.json", "r") as f:
+            character_profile = json.load(f)
         
     name = APP_NAMES
     user = username
-      #Replace with USER_IDS[username][1] once more character profiles are added
-    with open("student_cs.json", "r") as f:
-        character_profile = json.load(f)  
     initial_state = {
-    "user_name": "Alex",
-    "recipient_info": recipient_info,
-    "character": character_profile,
-    "review_feedback": "Initial email generation - no feedback yet"
+        "user_name": "Alex",
+        "recipient_info": recipient_info,
+        "character": character_profile,
+        "review_feedback": "Initial email generation - no feedback yet"
     }
-    print(recipient_info)
+    # Check if running from Flask app (command line args)
+    is_flask_call = len(sys.argv) > 1
+    
+    if not is_flask_call:
+        print(recipient_info)
+    
     email = await main_async(APP_NAME=name, USER_ID=user, initial_state=initial_state)
+    
+    # Clean up database file
     if os.path.exists('my_agent_data.db'):
         os.remove('my_agent_data.db')
-        print(f"my_agent_data.db deleted.")
+        if not is_flask_call:
+            print(f"my_agent_data.db deleted.")
     else:
-        print(f"my_agent_data.db does not exist.")
+        if not is_flask_call:
+            print(f"my_agent_data.db does not exist.")
+    
+    # If called from Flask, write email to file and output it
+    if is_flask_call and email:
+        # Write email to file for Flask app to read
+        with open("final_email.txt", "w") as f:
+            f.write(email)
+        print(email)
 
 
 if __name__ == "__main__":

@@ -4,6 +4,7 @@ from werkzeug.utils import secure_filename
 import json, os, uuid
 import re
 from pypdf import PdfReader
+from datetime import datetime
 
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 DATA_DIR = os.path.join(BASE_DIR, 'data')
@@ -75,6 +76,222 @@ def extract_coursework_hint(text: str, limit: int = 20):
         if len(candidates) >= limit:
             break
     return list(candidates)
+
+def enhance_student_data(student_data):
+    """Enhance student data by parsing transcript text and extracting comprehensive information"""
+    enhanced_data = student_data.copy()
+    
+    # Get transcript text if available
+    transcript_text = student_data.get('transcript_text', '')
+    
+    if transcript_text:
+        print(f"Parsing transcript text ({len(transcript_text)} characters)")
+        
+        # Extract name from transcript
+        if not enhanced_data.get('name'):
+            name_patterns = [
+                r'(?:Name|Student Name|Full Name)[:\s]+([A-Za-z\s]+)',
+                r'^([A-Z][a-z]+ [A-Z][a-z]+)',
+                r'(?:Applicant|Candidate)[:\s]+([A-Za-z\s]+)'
+            ]
+            for pattern in name_patterns:
+                name_match = re.search(pattern, transcript_text, re.IGNORECASE | re.MULTILINE)
+                if name_match:
+                    enhanced_data['name'] = name_match.group(1).strip()
+                    break
+        
+        # Extract major from transcript
+        if not enhanced_data.get('academic', {}).get('major'):
+            major_patterns = [
+                r'(?:Major|Program|Degree|Field of Study)[:\s]+([A-Za-z\s&]+)',
+                r'(?:Bachelor|Master|PhD) of ([A-Za-z\s]+)',
+                r'(?:Computer Science|Engineering|Mathematics|Physics|Biology|Chemistry|Psychology|Business)'
+            ]
+            for pattern in major_patterns:
+                major_match = re.search(pattern, transcript_text, re.IGNORECASE)
+                if major_match:
+                    if 'academic' not in enhanced_data:
+                        enhanced_data['academic'] = {}
+                    enhanced_data['academic']['major'] = major_match.group(1).strip()
+                    break
+        
+        # Extract GPA from transcript
+        if not enhanced_data.get('academic', {}).get('gpa'):
+            gpa_patterns = [
+                r'(?:GPA|Grade Point Average)[:\s]+(\d+\.?\d*)',
+                r'(?:Overall GPA|Cumulative GPA)[:\s]+(\d+\.?\d*)',
+                r'GPA[:\s]*(\d+\.?\d*)'
+            ]
+            for pattern in gpa_patterns:
+                gpa_match = re.search(pattern, transcript_text, re.IGNORECASE)
+                if gpa_match:
+                    if 'academic' not in enhanced_data:
+                        enhanced_data['academic'] = {}
+                    enhanced_data['academic']['gpa'] = gpa_match.group(1)
+                    break
+        
+        # Extract year/level from transcript
+        if not enhanced_data.get('academic', {}).get('year'):
+            year_patterns = [
+                r'(?:Year|Level|Status|Class)[:\s]+(Freshman|Sophomore|Junior|Senior|Graduate|Undergraduate|Graduate Student)',
+                r'(?:Currently|Currently enrolled as)[:\s]+(Freshman|Sophomore|Junior|Senior|Graduate)',
+                r'(?:Academic Standing)[:\s]+(Freshman|Sophomore|Junior|Senior|Graduate)'
+            ]
+            for pattern in year_patterns:
+                year_match = re.search(pattern, transcript_text, re.IGNORECASE)
+                if year_match:
+                    if 'academic' not in enhanced_data:
+                        enhanced_data['academic'] = {}
+                    enhanced_data['academic']['year'] = year_match.group(1)
+                    break
+        
+        # Extract comprehensive coursework
+        coursework = extract_coursework_hint(transcript_text, limit=50)
+        if coursework:
+            enhanced_data['coursework'] = coursework
+        
+        # Extract skills/technologies mentioned
+        skills = []
+        skill_keywords = [
+            'python', 'java', 'javascript', 'c++', 'c#', 'matlab', 'r', 'sql', 'html', 'css',
+            'machine learning', 'ai', 'artificial intelligence', 'data science', 'statistics',
+            'research', 'analysis', 'deep learning', 'neural networks', 'tensorflow', 'pytorch',
+            'react', 'angular', 'vue', 'node.js', 'django', 'flask', 'spring', 'git', 'docker',
+            'kubernetes', 'aws', 'azure', 'gcp', 'linux', 'unix', 'database', 'mongodb',
+            'postgresql', 'mysql', 'redis', 'kafka', 'spark', 'hadoop', 'blockchain'
+        ]
+        for keyword in skill_keywords:
+            if keyword.lower() in transcript_text.lower():
+                skills.append(keyword.title())
+        if skills:
+            enhanced_data['skills'] = list(set(skills))
+        
+        # Extract projects
+        projects = []
+        project_patterns = [
+            r'(?:Project|Capstone|Thesis|Dissertation)[:\s]+([^.\n]+)',
+            r'(?:Developed|Created|Built|Designed)[:\s]+([^.\n]+)',
+            r'(?:Worked on|Implemented|Programmed)[:\s]+([^.\n]+)',
+            r'(?:Final Project|Senior Project|Research Project)[:\s]+([^.\n]+)'
+        ]
+        for pattern in project_patterns:
+            matches = re.findall(pattern, transcript_text, re.IGNORECASE)
+            for match in matches:
+                if len(match.strip()) > 10:  # Filter out very short matches
+                    projects.append(match.strip())
+        
+        if projects:
+            enhanced_data['projects'] = list(set(projects))[:10]  # Limit to 10 projects
+        
+        # Extract internships and work experience
+        internships = []
+        work_patterns = [
+            r'(?:Internship|Intern)[:\s]+([^.\n]+)',
+            r'(?:Worked at|Employed at|Position at)[:\s]+([^.\n]+)',
+            r'(?:Experience at|Role at)[:\s]+([^.\n]+)',
+            r'(?:Summer Intern|Research Intern|Software Intern)[:\s]+([^.\n]+)'
+        ]
+        for pattern in work_patterns:
+            matches = re.findall(pattern, transcript_text, re.IGNORECASE)
+            for match in matches:
+                if len(match.strip()) > 10:
+                    internships.append(match.strip())
+        
+        if internships:
+            enhanced_data['internships'] = list(set(internships))[:5]  # Limit to 5 internships
+        
+        # Extract research experience
+        research_experience = []
+        research_patterns = [
+            r'(?:Research|Study|Investigation)[:\s]+([^.\n]+)',
+            r'(?:Research Assistant|Research Intern)[:\s]+([^.\n]+)',
+            r'(?:Published|Co-authored)[:\s]+([^.\n]+)',
+            r'(?:Conference|Journal|Paper)[:\s]+([^.\n]+)'
+        ]
+        for pattern in research_patterns:
+            matches = re.findall(pattern, transcript_text, re.IGNORECASE)
+            for match in matches:
+                if len(match.strip()) > 10:
+                    research_experience.append(match.strip())
+        
+        if research_experience:
+            enhanced_data['research_experience'] = list(set(research_experience))[:5]
+        
+        # Extract achievements and awards
+        achievements = []
+        achievement_patterns = [
+            r'(?:Award|Recognition|Honor)[:\s]+([^.\n]+)',
+            r'(?:Dean\'s List|Honor Roll|Scholarship)[:\s]+([^.\n]+)',
+            r'(?:Competition|Contest|Hackathon)[:\s]+([^.\n]+)',
+            r'(?:Winner|Finalist|Participant)[:\s]+([^.\n]+)'
+        ]
+        for pattern in achievement_patterns:
+            matches = re.findall(pattern, transcript_text, re.IGNORECASE)
+            for match in matches:
+                if len(match.strip()) > 10:
+                    achievements.append(match.strip())
+        
+        if achievements:
+            enhanced_data['achievements'] = list(set(achievements))[:5]
+        
+        # Extract extracurricular activities
+        activities = []
+        activity_patterns = [
+            r'(?:Club|Organization|Society)[:\s]+([^.\n]+)',
+            r'(?:Volunteer|Community Service)[:\s]+([^.\n]+)',
+            r'(?:Leadership|President|Vice President|Secretary)[:\s]+([^.\n]+)',
+            r'(?:Member of|Active in)[:\s]+([^.\n]+)'
+        ]
+        for pattern in activity_patterns:
+            matches = re.findall(pattern, transcript_text, re.IGNORECASE)
+            for match in matches:
+                if len(match.strip()) > 10:
+                    activities.append(match.strip())
+        
+        if activities:
+            enhanced_data['extracurricular_activities'] = list(set(activities))[:5]
+        
+        # Extract relevant courses (more specific than coursework)
+        relevant_courses = []
+        course_patterns = [
+            r'(?:CS|CSE|ECE|MATH|STAT|PHYS|CHEM|BIO)\s*\d{3,4}[:\s]+([^.\n]+)',
+            r'(?:Course|Class)[:\s]+([A-Za-z\s]+(?:Programming|Data|Machine|AI|Software|Algorithm|Database|Network))',
+            r'(?:Advanced|Upper-level)[:\s]+([^.\n]+)'
+        ]
+        for pattern in course_patterns:
+            matches = re.findall(pattern, transcript_text, re.IGNORECASE)
+            for match in matches:
+                if len(match.strip()) > 5:
+                    relevant_courses.append(match.strip())
+        
+        if relevant_courses:
+            enhanced_data['relevant_courses'] = list(set(relevant_courses))[:10]
+        
+        print(f"Extracted data: {len(enhanced_data)} fields")
+    
+    # Ensure all required fields have default values
+    if not enhanced_data.get('name'):
+        enhanced_data['name'] = 'Student'
+    if 'academic' not in enhanced_data:
+        enhanced_data['academic'] = {}
+    if not enhanced_data['academic'].get('major'):
+        enhanced_data['academic']['major'] = 'Computer Science'
+    if not enhanced_data['academic'].get('gpa'):
+        enhanced_data['academic']['gpa'] = '3.5'
+    if not enhanced_data['academic'].get('year'):
+        enhanced_data['academic']['year'] = 'Junior'
+    
+    # Add a summary of extracted information
+    enhanced_data['extraction_summary'] = {
+        'total_fields': len(enhanced_data),
+        'has_projects': 'projects' in enhanced_data,
+        'has_internships': 'internships' in enhanced_data,
+        'has_research': 'research_experience' in enhanced_data,
+        'has_skills': 'skills' in enhanced_data,
+        'extraction_timestamp': str(datetime.now())
+    }
+    
+    return enhanced_data
 
 # ---- Errors ----
 @app.errorhandler(413)
@@ -199,12 +416,24 @@ def rag_recommendations():
         transcript_text = extract_pdf_text(transcript_path) if transcript_path else ''
         coursework = extract_coursework_hint(transcript_text)
 
+        # Enhanced student data with transcript information
+        enhanced_student_data = {**student_data, 'transcript_text': transcript_text, 'coursework': coursework}
+        
+        # Save enhanced student data to student.json for email generation
+        student_json_path = os.path.join(BASE_DIR, '..', 'student.json')
+        with open(student_json_path, 'w', encoding='utf-8') as f:
+            json.dump(enhanced_student_data, f, indent=2, ensure_ascii=False)
+        
+        print(f"Saved enhanced student data to student.json with {len(enhanced_student_data)} fields")
+        print(f"Transcript text length: {len(transcript_text)} characters")
+        print(f"Coursework extracted: {len(coursework)} items")
+
         # Provider switch: prefer OpenAI if chosen and available; else Gemini
         if AI_PROVIDER == 'openai':
             if not OPENAI_AVAILABLE:
                 return jsonify({'error': 'OpenAI provider not available. Install openai and set OPENAI_API_KEY.'}), 503
             recs = get_openai_rag_recommendations(
-                student_data={**student_data, 'transcript_text': transcript_text, 'coursework': coursework},
+                student_data=enhanced_student_data,
                 transcript_path=transcript_path,
                 labs_data=labs_data
             )
@@ -212,7 +441,7 @@ def rag_recommendations():
             if not GEMINI_AVAILABLE:
                 return jsonify({'error': 'Gemini provider not available. Install google-generativeai and set GEMINI_API_KEY.'}), 503
             recs = get_gemini_rag_recommendations(
-                student_data={**student_data, 'transcript_text': transcript_text, 'coursework': coursework},
+                student_data=enhanced_student_data,
                 transcript_path=transcript_path,
                 labs_data=labs_data
             )
@@ -223,6 +452,79 @@ def rag_recommendations():
         if transcript_path and os.path.exists(transcript_path):
             try: os.remove(transcript_path)
             except OSError: pass
+
+@app.route('/api/draft-email', methods=['POST'])
+def draft_email():
+    """Generate a cold email for a specific professor/lab"""
+    try:
+        data = request.get_json()
+        professor_name = data.get('professor_name', '').strip()
+        lab_name = data.get('lab_name', '').strip()
+        student_data = data.get('student_data', {})
+        
+        print(f"Received data: {data}")
+        print(f"Student data: {student_data}")
+        
+        if not professor_name or not lab_name:
+            return jsonify({'error': 'Professor name and lab name are required'}), 400
+        
+        # Check if student.json already exists (from RAG analysis)
+        student_json_path = os.path.join(BASE_DIR, '..', 'student.json')
+        
+        if os.path.exists(student_json_path):
+            # Use existing student data from RAG analysis
+            with open(student_json_path, 'r', encoding='utf-8') as f:
+                existing_data = json.load(f)
+            print(f"Using existing student data from RAG analysis with {len(existing_data)} fields")
+        else:
+            # Fallback: enhance the current student data
+            enhanced_student_data = enhance_student_data(student_data)
+            with open(student_json_path, 'w', encoding='utf-8') as f:
+                json.dump(enhanced_student_data, f, indent=2, ensure_ascii=False)
+            print(f"Created new student data with {len(enhanced_student_data)} fields")
+        
+        # Import and run the email generation system
+        import subprocess
+        import sys
+        
+        # Create a research query for the professor
+        research_query = f"Give me information about {professor_name} from {lab_name}"
+        
+        # Run the main.py email generation system with professor and lab arguments
+        result = subprocess.run([
+            sys.executable, 
+            os.path.join(BASE_DIR, '..', 'main.py'),
+            professor_name,
+            lab_name
+        ], 
+        capture_output=True, 
+        text=True, 
+        cwd=os.path.join(BASE_DIR, '..')
+        )
+        
+        if result.returncode != 0:
+            return jsonify({'error': f'Email generation failed: {result.stderr}'}), 500
+        
+        # Read the generated email from the file that main.py creates
+        email_file_path = os.path.join(BASE_DIR, '..', 'final_email.txt')
+        if not os.path.exists(email_file_path):
+            return jsonify({'error': 'Email file was not created'}), 500
+        
+        with open(email_file_path, 'r', encoding='utf-8') as f:
+            email_content = f.read().strip()
+        
+        if not email_content:
+            return jsonify({'error': 'No email content found in file'}), 500
+        
+        return jsonify({
+            'success': True,
+            'email': email_content,
+            'professor_name': professor_name,
+            'lab_name': lab_name
+        })
+        
+    except Exception as e:
+        return jsonify({'error': f'Failed to generate email: {str(e)}'}), 500
 
 if __name__ == '__main__':
     print("Starting ResearchConnect…")
